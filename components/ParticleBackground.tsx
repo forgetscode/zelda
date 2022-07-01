@@ -18,7 +18,6 @@ const ParticleBackground = () => {
         <Particles
           id="tsparticles"
           init={particlesInit}
-          loaded={particlesLoaded}
           options={{
             fullScreen: {
                 enable: true,
