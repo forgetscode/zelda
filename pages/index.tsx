@@ -5,7 +5,7 @@ import ParticleBackground from '../components/ParticleBackground';
 const Index: NextPage = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen scale-50  md:scale-100">
+      <div className="flex flex-col justify-center items-center h-screen scale-75  md:scale-100">
         <Link href="https://github.com/forgetscode/zelda">
           <a target="_blank">
               <div className='text-teal-500 flex flex-row group'>
@@ -20,7 +20,7 @@ const Index: NextPage = () => {
                               text-white bg-gray-900 
                               text-xs font-bold 
                               transition-all duration-100 scale-0 origin-left group-hover:scale-100">
-                              Github
+                              Code
                 </span>
               </div>
             </a>
