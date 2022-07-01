@@ -8,7 +8,7 @@ const Index: NextPage = () => {
       <div className="flex flex-col justify-center items-center h-screen">
         <Link href="https://github.com/forgetscode/zelda">
           <a target="_blank">
-              <div className='text-teal-500 flex flex-row h-58 w-58 group'>
+              <div className='text-teal-500 flex flex-row group'>
                 <div className='flex flex-row bg-gray-900 p-4  rounded-xl transition-all 
                                 duration-300 ease-linear cursor-pointer hover:scale-110 hover:bg-teal-600
                               hover:text-white
@@ -25,7 +25,7 @@ const Index: NextPage = () => {
               </div>
             </a>
           </Link>
-        <p className='mt-8 text-l md:text-3xl text-white font-bold'>Serverless On-chain messaging protocol on Solana</p>
+        <p className='mt-8 text-s s:text-l md:text-3xl text-white md:font-bold'>Serverless On-chain messaging protocol on Solana</p>
       </div>
       <ParticleBackground/>
     </>
