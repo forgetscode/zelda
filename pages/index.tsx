@@ -1,24 +1,29 @@
 import type { NextPage } from 'next'
+import Link from 'next/link';
 
 const Index: NextPage = () => {
   return (
     <>
-      <div className="flex flex-col items-center h-screen mt-16">
-        <div className='text-teal-500 flex flex-row h-58 w-58 group'>
-          <div className='flex flex-row bg-gray-900 p-4  rounded-xl transition-all 
-                          duration-300 ease-linear cursor-pointer hover:scale-110 hover:bg-teal-600
-                        hover:text-white
-                        '>
-            <p className='mt-auto italic text-4xl'> Zelda</p>
-            <p className='mt-auto not-italic font-thin'> sms</p>
-          </div>
-          <span className="flex items-center ml-2 h-8 w-auto p-2 min-w-max left-14 rounded-md shadow-md
-                        text-white bg-gray-900 
-                        text-xs font-bold 
-                        transition-all duration-100 scale-0 origin-left group-hover:scale-100">
-                        Github
-          </span>
-        </div>
+      <div className="flex flex-col items-center mt-32">
+        <Link href="https://github.com/forgetscode/zelda">
+          <a target="_blank">
+              <div className='text-teal-500 flex flex-row h-58 w-58 group'>
+                <div className='flex flex-row bg-gray-900 p-4  rounded-xl transition-all 
+                                duration-300 ease-linear cursor-pointer hover:scale-110 hover:bg-teal-600
+                              hover:text-white
+                              '>
+                  <p className='mt-auto italic text-4xl'> Zelda</p>
+                  <p className='mt-auto not-italic font-thin'> sms</p>
+                </div>
+                <span className="flex items-center ml-2 my-auto h-8 w-auto p-2 min-w-max left-14 rounded-md shadow-md
+                              text-white bg-gray-900 
+                              text-xs font-bold 
+                              transition-all duration-100 scale-0 origin-left group-hover:scale-100">
+                              Github
+                </span>
+              </div>
+            </a>
+          </Link>
         <p className='mt-8 text-l md:text-3xl text-white font-semibold'>Serverless On-chain messaging protocol for Solana</p>
       </div>
     </>
@@ -26,3 +31,4 @@ const Index: NextPage = () => {
 }
 
 export default Index
+
