@@ -3,7 +3,6 @@ import { EmailIcon,
          QuestionIcon,
          Search2Icon,
          SettingsIcon } from '@chakra-ui/icons';
-import { Flex } from '@chakra-ui/react';
 import React from 'react'
 import Link from 'next/link';
 
@@ -12,7 +11,7 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 const SideBar = () => {
     return (
         <>
-        <div className =" fixed top-0 left-0 h-screen w-16 m-0
+        <div className ="fixed top-0 left-0 h-screen w-16 m-0
                         flex flex-col
                         bg-gray-900 text-white shadow-lg mt-20">
             <hr  className ="w-[%100] border-gray-600"/>
@@ -32,15 +31,23 @@ const SideBar = () => {
                                 flex flex-row
                                 bg-gray-900 shadow-lg p-2">
                     <Link href="/">
-                        <div className=' ml-1 p-2 flex flex-row my-auto bg-gray-700 hover:bg-teal-600
-                                hover:scale-110
-                                text-teal-500 
-                                hover:text-white
-                                rounded-3xl hover:rounded-xl
-                                transition-all duration-300 ease-linear
-                                cursor-pointer'>
-                            <p className=' italic text-3xl'> Zelda</p>
-                            <p className='mt-auto not-italic font-thin'> sms</p>
+                        <div className='group flex flex-row'>
+                            <div className=' ml-1 mt-1 p-2 flex flex-row my-auto bg-gray-700 hover:bg-teal-600
+                                    hover:scale-110
+                                    text-teal-500 
+                                    hover:text-white
+                                    rounded-3xl hover:rounded-xl
+                                    transition-all duration-300 ease-linear
+                                    cursor-pointer'>
+                                <p className='italic text-3xl'> Zelda</p>
+                                <p className='mt-auto not-italic font-thin text-sm'> sms</p>
+                            </div>
+                            <span className="flex items-center ml-3 my-auto h-8 w-auto p-2 min-w-max left-14 rounded-md shadow-md
+                                text-white bg-gray-900 
+                                text-xs font-bold 
+                                transition-all duration-100 scale-0 origin-left group-hover:scale-100">
+                                Home
+                            </span>
                         </div>
                     </Link>
                     <div className='my-auto ml-auto py-1 px-1 mr-5'>

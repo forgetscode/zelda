@@ -52,8 +52,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             <WalletProvider wallets={wallets} autoConnect>
                 <WalletModalProvider>
                 <SideBar></SideBar>
-                <div className='ml-16 bg-gray-800'>
-                  <div className='p-3 h-screen'>
+                <div className='ml-16'>
+                  <div className='h-screen'>
                     <Component {...pageProps}  />
                   </div>
                 </div>

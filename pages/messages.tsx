@@ -1,10 +1,11 @@
 import type { NextPage } from 'next'
+import ParticleBackground from '../components/ParticleBackground';
 
 
 const Messages: NextPage = () => {
   return (
     <>
-          <p className='text-white'>messages</p>
+        <ParticleBackground/>
     </>
   );
 }
