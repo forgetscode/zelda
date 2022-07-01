@@ -25,7 +25,7 @@ const Index: NextPage = () => {
               </div>
             </a>
           </Link>
-        <p className='mt-8 text-l md:text-3xl text-white font-semibold'>Serverless On-chain messaging protocol on Solana</p>
+        <p className='mt-8 text-l md:text-3xl text-white font-bold'>Serverless On-chain messaging protocol on Solana</p>
       </div>
       <ParticleBackground/>
     </>
