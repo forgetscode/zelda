@@ -32,7 +32,7 @@ const SideBar = () => {
                                 bg-gray-900 shadow-lg p-2">
                     <Link href="/">
                         <div className='group flex flex-row'>
-                            <div className=' ml-1 mt-1 p-2 flex flex-row my-auto bg-gray-700 hover:bg-teal-600
+                            <div className='ml-1 p-3 flex flex-row my-auto bg-gray-700 hover:bg-teal-600
                                     hover:scale-110
                                     text-teal-500 
                                     hover:text-white
@@ -40,7 +40,7 @@ const SideBar = () => {
                                     transition-all duration-300 ease-linear
                                     cursor-pointer'>
                                 <p className='italic text-3xl'> Zelda</p>
-                                <p className='mt-auto not-italic font-thin text-sm'> sms</p>
+                                <p className='mt-auto not-italic text-sm'> sms</p>
                             </div>
                             <span className="flex items-center ml-3 my-auto h-8 w-auto p-2 min-w-max left-14 rounded-md shadow-md
                                 text-white bg-gray-900 

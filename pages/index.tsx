@@ -14,7 +14,7 @@ const Index: NextPage = () => {
                               hover:text-white
                               '>
                   <p className='italic text-4xl'> Zelda</p>
-                  <p className='mt-auto not-italic font-thin text-sm'> sms</p>
+                  <p className='mt-auto not-italic text-sm'> sms</p>
                 </div>
                 <span className="flex items-center ml-3 my-auto h-8 w-auto p-2 min-w-max left-14 rounded-md shadow-md
                               text-white bg-gray-900 
