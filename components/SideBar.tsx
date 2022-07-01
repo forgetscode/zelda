@@ -53,7 +53,6 @@ const SideBar = () => {
                     <div className='my-auto ml-auto py-1 px-1 mr-5'>
                         <WalletMultiButton className='!bg-gray-700
                                     hover:scale-105
-                                    !hover:bg-teal-600
                                     !text-teal-500 
                                     !rounded-3xl !hover:rounded-xl
                                     !transition-all !duration-300 !ease-linear
