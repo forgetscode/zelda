@@ -5,7 +5,7 @@ import ParticleBackground from '../components/ParticleBackground';
 const Index: NextPage = () => {
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen">
+      <div className="flex flex-col justify-center items-center h-screen scale-50  md:scale-100">
         <Link href="https://github.com/forgetscode/zelda">
           <a target="_blank">
               <div className='text-teal-500 flex flex-row group'>
@@ -25,7 +25,7 @@ const Index: NextPage = () => {
               </div>
             </a>
           </Link>
-        <p className='ml-2 mt-8 text-s s:text-l md:text-3xl text-white md:font-bold'>Serverless On-chain messaging protocol on Solana</p>
+        <p className='mt-8 text-3xl text-white font-bold'>Serverless On-chain messaging protocol on Solana</p>
       </div>
       <ParticleBackground/>
     </>
