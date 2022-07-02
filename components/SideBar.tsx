@@ -50,12 +50,12 @@ const SideBar = () => {
                             </span>
                         </div>
                     </Link>
-                    <div className='my-auto ml-auto py-1 px-1 mr-5'>
+                    <div className='my-auto ml-auto mr-1'>
                         <WalletMultiButton className='!bg-gray-700
                                     hover:scale-105
                                     !text-teal-500 
                                     !rounded-3xl !hover:rounded-xl
-                                    !transition-all !duration-300 !ease-linear
+                                    !transition-all !duration-300 !ease-linear !h-14
                                     ' />
                     </div>
             </div>
