@@ -14,7 +14,7 @@ const SideBar = () => {
         <div className ="fixed top-0 left-0 h-screen w-16 m-0
                         flex flex-col
                         bg-gray-900 text-white shadow-lg mt-20">
-            <hr  className ="w-[%100] border-gray-500"/>
+            <hr  className =" self-center w-12 border-gray-500"/>
             <Link href="/messages">
                 <a>
                     <SideBarIcon icon = {<EmailIcon boxSize={26}/>} text="Messages"/>
