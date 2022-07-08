@@ -21,6 +21,7 @@ const Index: NextPage = () => {
                 <span className="flex items-center ml-3 my-auto h-8 w-auto p-2 min-w-max left-14 rounded-md shadow-md
                               text-white bg-gray-900 
                               text-xs font-bold 
+                              pointer-events-auto
                               transition-all duration-100 scale-0 origin-left group-hover:scale-100">
                               Github
                 </span>

@@ -10,7 +10,7 @@ const ChatList = () => {
         return (
             <>
                 <div className='bg-gray-700 w-full h-full flex ml-10'> 
-                    <div className="flex items-center justify-center h-screen m-auto">
+                    <div className="flex items-center justify-center h-screen w-full">
                         <LoadingSpinner sizeOf ={'medium'}></LoadingSpinner>
                     </div>
                 </div>
@@ -22,7 +22,7 @@ const ChatList = () => {
         return (
             <>
                 <div className='bg-gray-700 w-full h-full flex ml-10'> 
-                    <div className="flex items-center justify-center h-screen m-auto">
+                    <div className="flex items-center justify-center h-screen w-full">
                         chat list
                     </div>
                 </div>
