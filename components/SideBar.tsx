@@ -32,13 +32,13 @@ const SideBar = () => {
                                 bg-gray-900 shadow-lg p-2">
                     <Link href="/">
                         <div className='group flex flex-row'>
-                            <div className='ml-1 p-3 flex flex-row my-auto bg-gray-700 hover:bg-teal-600
+                            <div className='ml-1 p-3 h-14 flex flex-row my-auto bg-gray-700 hover:bg-teal-600
                                     hover:scale-110
                                     text-teal-500 
                                     hover:text-white
                                     rounded-3xl hover:rounded-xl
                                     transition-all duration-300 ease-linear
-                                    cursor-pointer'>
+                                    cursor-pointer '>
                                 <p className='italic text-3xl'> Zelda</p>
                                 <p className='mt-auto not-italic text-sm'> sms</p>
                             </div>
