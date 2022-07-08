@@ -14,7 +14,7 @@ const SideBar = () => {
         <div className ="fixed top-0 left-0 h-screen w-16 m-0
                         flex flex-col
                         bg-gray-900 text-white shadow-lg mt-20">
-            <hr  className ="w-[%100] border-gray-600"/>
+            <hr  className ="w-[%100] border-gray-500"/>
             <Link href="/messages">
                 <a>
                     <SideBarIcon icon = {<EmailIcon boxSize={26}/>} text="Messages"/>
@@ -23,7 +23,7 @@ const SideBar = () => {
             <SideBarIcon icon = {<QuestionIcon boxSize={26}/>} text="Help"/>
             <SideBarIcon icon = {<Search2Icon boxSize={26}/>} text="Search"/>
             <SideBarIcon icon = {<MoonIcon boxSize={26}/>} text="Moon"/>
-            <hr  className ="self-center w-12 border-gray-600" />
+            <hr  className ="self-center w-12 border-gray-500" />
             <SideBarIcon icon = {<SettingsIcon boxSize={26}/>} text="Settings"/>
         </div>
             <div className='flex flex-col'>

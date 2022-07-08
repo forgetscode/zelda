@@ -9,7 +9,7 @@ const ChatList = () => {
     if (!loading){
         return (
             <>
-                <div className='bg-gray-800 w-full h-full flex ml-10'> 
+                <div className='bg-gray-700 w-full h-full flex ml-10'> 
                     <div className="flex items-center justify-center h-screen m-auto">
                         <LoadingSpinner sizeOf ={'medium'}></LoadingSpinner>
                     </div>
@@ -21,7 +21,7 @@ const ChatList = () => {
     else {
         return (
             <>
-                <div className='bg-gray-800 w-full h-full flex ml-10'> 
+                <div className='bg-gray-700 w-full h-full flex ml-10'> 
                     <div className="flex items-center justify-center h-screen m-auto">
                         chat list
                     </div>

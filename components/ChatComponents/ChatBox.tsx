@@ -8,7 +8,7 @@ const ChatList = () => {
     if (!loading){
         return (
             <>
-                <div className='flex bg-gray-900 w-full h-full'> 
+                <div className='flex bg-gray-800 w-full h-full'> 
                     <div className="flex items-center justify-center h-full m-auto">
                         <LoadingSpinner sizeOf ={'small'}></LoadingSpinner>
                     </div>
@@ -19,7 +19,7 @@ const ChatList = () => {
 
     return (
         <>
-            <div className='flex bg-gray-900 w-full h-full'> 
+            <div className='flex bg-gray-800 w-full h-full'> 
                 <div className="flex items-center justify-center h-full m-auto">
                     chat box
                 </div>
