@@ -2,8 +2,6 @@ import type { NextPage } from 'next'
 import ChatBox from '../components/ChatComponents/ChatBox';
 import ChatList from '../components/ChatComponents/ChatList';
 import ChatMessages from '../components/ChatComponents/ChatMessages';
-import ParticleBackground from '../components/ParticleBackground';
-
 
 const Messages: NextPage = () => {
   return (
