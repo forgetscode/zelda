@@ -48,16 +48,28 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return (
       <>
+      {/* All pages*/}
+
+        {/* Wallet adapter*/}
         <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} autoConnect>
-                <WalletModalProvider>
-                <SideBar></SideBar>
+          <WalletProvider wallets={wallets} autoConnect>
+            <WalletModalProvider>
+
+                  {/* Navigation and sidebar overlayed onto page*/}
+                  <SideBar></SideBar>
+
+                  {/* Screen*/}
                   <div className='h-screen'>
                     <Component {...pageProps}/>
                   </div>
-                </WalletModalProvider>
-            </WalletProvider>
-        </ConnectionProvider>
+                  {/*End of Screen*/}
+
+         </WalletModalProvider>
+        </WalletProvider>
+      </ConnectionProvider>
+      {/* End of Wallet adapter*/}
+
+      {/* End of All pages*/}
       </>
     );
 }
