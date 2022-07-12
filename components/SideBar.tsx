@@ -46,7 +46,7 @@ const SideBar = () => {
                     <Link href="/">
                         <div className='text-teal-500 flex flex-row group'>
 
-                            <div className='flex flex-row bg-gray-700 p-2 h-12 rounded-2xl hover:rounded-xl transition-all 
+                            <div className='flex flex-row bg-gray-800 p-2 h-12 rounded-2xl hover:rounded-xl transition-all 
                                             duration-300 ease-linear cursor-pointer hover:scale-110 hover:bg-teal-600
                                             hover:text-white
                                             '>
@@ -68,7 +68,7 @@ const SideBar = () => {
 
                 {/* Wallet button*/}
                 <div className='my-auto ml-auto'>
-                <WalletMultiButton className='!bg-gray-700
+                <WalletMultiButton className='!bg-gray-800
                             hover:scale-110
                             !p-2
                             !text-sm
