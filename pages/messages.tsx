@@ -19,7 +19,7 @@ const Messages: NextPage = () => {
             {/* ChatList toggle On*/}    
             <div className='flex flex-row group'>
               <button onClick={() => setChatBarState(true)} className="absolute h-12 
-                top-1/2 -translate-y-1/2 bg-gray-800 p-1 rounded-r-lg transition-all 
+                top-1/2 -translate-y-1/2 bg-gray-900 p-1 rounded-r-lg transition-all 
                 duration-300 ease-linear cursor-pointer hover:scale-110 hover:bg-teal-600
               hover:text-white text-teal-500 italic text-sm
                 ">
