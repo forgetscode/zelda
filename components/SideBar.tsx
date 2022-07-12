@@ -42,7 +42,7 @@ const SideBar = () => {
                             bg-gray-900 shadow-lg p-2">
 
                 {/* Homepage button*/}
-                <div className='group flex justify-center'>
+                <div className='group flex justify-center ml-1'>
                     <Link href="/">
                         <div className='text-teal-500 flex flex-row group'>
 
