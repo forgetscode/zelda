@@ -42,7 +42,7 @@ const SideBar = () => {
                             bg-gray-900 shadow-lg p-2">
 
                 {/* Homepage button*/}
-                <div className='group flex justify-center ml-1'>
+                <div className='group flex justify-center'>
                     <Link href="/">
                         <div className='text-teal-500 flex flex-row group'>
 
@@ -67,7 +67,7 @@ const SideBar = () => {
                 {/* End of Homepage button*/}
 
                 {/* Wallet button*/}
-                <div className='my-auto ml-auto mr-1'>
+                <div className='my-auto ml-auto'>
                 <WalletMultiButton className='!bg-gray-700
                             hover:scale-110
                             !p-2
