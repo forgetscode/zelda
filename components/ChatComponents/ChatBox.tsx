@@ -40,7 +40,7 @@ const ChatList = () => {
             {/*End of InputBox*/}
 
             {/*Send Button*/}
-            <button className= "w-1/6 md:w-1/12 mx-auto md:ml-6 my-auto h-4/5 bg-teal-600 p-2 rounded-xl text-white italic text-bold md:text-md flex items-center justify-center transition-all duration-300 ease-linear cursor-pointer hover:scale-105 hover:bg-gray-900 hover:text-teal-500"> Send </button>
+            <button className= "w-1/6 md:w-1/12 mx-auto md:ml-5 my-auto h-4/5 bg-teal-600 p-2 rounded-xl text-white italic text-bold md:text-md flex items-center justify-center transition-all duration-300 ease-linear cursor-pointer hover:scale-105 hover:bg-gray-900 hover:text-teal-500"> Send </button>
             {/*End of Send Button*/}
 
         </div>

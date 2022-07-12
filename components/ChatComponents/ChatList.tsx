@@ -23,7 +23,7 @@ const ChatList = () => {
         );
     }
     {/* End of Display if loading*/}
-    
+
 
     {/* Display if not loading*/}
     return (

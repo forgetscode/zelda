@@ -29,7 +29,7 @@ const SideBar = () => {
                 <SideBarIcon icon = {<QuestionIcon boxSize={icon_size}/>} text="Help"/>
                 <SideBarIcon icon = {<Search2Icon boxSize={icon_size}/>} text="Search"/>
                 <SideBarIcon icon = {<MoonIcon boxSize={icon_size}/>} text="Moon"/>
-                <hr  className ="self-center w-6 border-gray-500" />
+                <hr  className ="self-center w-12 border-gray-500" />
                 <SideBarIcon icon = {<SettingsIcon boxSize={icon_size}/>} text="Settings"/>
                 {/* End of Span of icons for Sidebar*/}
 
@@ -37,22 +37,10 @@ const SideBar = () => {
             {/* End of Sidebar*/}
 
             {/* NavBar*/}
-            <div className =" fixed top-0 h-16 w-screen 
+            <div className ="fixed top-0 h-16 w-screen 
                             flex flex-row
                             bg-gray-900 shadow-lg p-2">
 
-
-{/*</div>
-<a target="_blank">
-                  <div className='text-teal-500 flex flex-row group'>
-                    <div className='flex flex-row bg-gray-900 p-4  rounded-xl transition-all 
-                                    duration-300 ease-linear cursor-pointer hover:scale-110 hover:bg-teal-600
-                                  hover:text-white
-                                  '>
-                    <p className='italic text-4xl'> Zelda</p>
-                    <p className='mt-auto not-italic text-sm'> sms</p>
-                    */}
-                
                 {/* Homepage button*/}
                 <div className='group flex justify-center'>
                     <Link href="/">
