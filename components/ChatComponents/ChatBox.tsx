@@ -32,7 +32,7 @@ const ChatList = () => {
             {/*InputBox*/}
             <div className="flex my-auto ml-6 p-2 w-4/6 h-4/5 border-2 rounded-xl 
                 border-teal-500 
-                shadow-xl bg-gray-700
+                shadow-xl bg-gray-800
                 lg:ml-24 text-white resize-none !focus:border-gray-900
                 transition-all duration-300 ease-linear cursor-pointer
                 ">
