@@ -33,9 +33,10 @@ const ChatList = () => {
             {/* ListBox*/}
             <div className='bg-gray-800 w-full h-full flex'> 
                 {/* ItemsList*/}
-                <div className="flex flex-col w-full mt-16 ml-16 p-2">
-                    <ChatItem ID = {"First chat ID loooooooooooooong"}></ChatItem>
-                    <ChatItem ID = {"Secont chat ID"}></ChatItem>
+                <div className="flex flex-col w-full mt-16 ml-16">
+                    <ChatItem ID = {"DfT3LJ75YTamopdp9grXpUv3ZrtqGfsDiJghBKn5DJbB"}></ChatItem>
+                    <ChatItem ID = {"fT654654opdp9grXpUv3ZrtqGfsDiJghBKn5DJbB"}></ChatItem>
+                    <div className="mb-2"/>
                     <AddChatItem ></AddChatItem>
                 </div>
                 {/* End of ItemsList*/}

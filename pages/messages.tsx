@@ -80,7 +80,7 @@ const Messages: NextPage = () => {
             <button onClick={() => setChatBarState(false)} className="absolute h-12
               top-1/2 -translate-y-1/2 bg-gray-800 p-1 rounded-r-lg transition-all 
               duration-300 ease-linear cursor-pointer hover:scale-110 hover:bg-teal-600
-            hover:text-white text-teal-500 italic text-sm
+            hover:text-white text-teal-500 italic text-sm 
               ">
               <p>{"<"}</p>
               <span className="absolute top-1/2 -translate-y-1/2 h-8 w-auto p-2 min-w-max left-5 rounded-md shadow-md
