@@ -3,12 +3,10 @@ import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { ConnectionProvider, WalletProvider,  } from '@solana/wallet-adapter-react';
 import {
   WalletModalProvider,
-  WalletMultiButton
 } from '@solana/wallet-adapter-react-ui';
 import {
     LedgerWalletAdapter,
     PhantomWalletAdapter,
-    SlopeWalletAdapter,
     SolflareWalletAdapter,
     SolletExtensionWalletAdapter,
     SolletWalletAdapter,
@@ -36,7 +34,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     const wallets = useMemo(
         () => [
             new PhantomWalletAdapter(),
-            new SlopeWalletAdapter(),
             new SolflareWalletAdapter({ network }),
             new TorusWalletAdapter(),
             new LedgerWalletAdapter(),
