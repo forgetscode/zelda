@@ -22,6 +22,9 @@ module.exports = {
       spacing: {
         88: '22rem',
       },
+      screens: {
+        'hover-hover': {'raw': '(hover: hover)'},
+      },
     },
   },
   plugins: [],
