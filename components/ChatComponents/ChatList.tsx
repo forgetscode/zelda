@@ -1,5 +1,7 @@
 import { useState } from "react";
 import LoadingSpinner from "../UtilityComponents/LoadingSpinner";
+import ChatItem from "../UtilityComponents/ChatItem";
+import AddChatItem from "../UtilityComponents/AddChatItem";
 
 
 const ChatList = () => {
@@ -7,12 +9,12 @@ const ChatList = () => {
     
     
     {/* Display if loading*/}
-    if (!loading){
+    if (loading){
         return (
             <>
 
             {/* ListBox*/}
-            <div className='bg-gray-800 w-full h-full flex ml-10'> 
+            <div className='bg-gray-800 w-full h-full flex'> 
                 <div className="flex items-center justify-center h-screen w-full">
                     <LoadingSpinner sizeOf ={'medium'}></LoadingSpinner>
                 </div>
@@ -29,14 +31,15 @@ const ChatList = () => {
     return (
         <>
             {/* ListBox*/}
-            <div className='bg-gray-800 w-full h-full flex ml-10'> 
-
+            <div className='bg-gray-800 w-full h-full flex'> 
                 {/* ItemsList*/}
-                <div className="flex items-center justify-center h-screen w-full">
-                    chat list
+                <div className="flex flex-col w-full mt-16 ml-16 p-2">
+                    <ChatItem ID = {"First chat ID loooooooooooooong"}></ChatItem>
+                    <ChatItem ID = {"Secont chat ID"}></ChatItem>
+                    <AddChatItem ></AddChatItem>
                 </div>
                 {/* End of ItemsList*/}
-
+                {/* ItemsList*/}
             </div>
             {/* End of ListBox*/}
 

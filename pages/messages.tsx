@@ -67,7 +67,7 @@ const Messages: NextPage = () => {
 
 
       {/* ChatList*/} 
-      <div className="flex-row w-80 h-full ">
+      <div className="flex-row w-80 h-full">
         <ChatList/>
       </div>
       {/* End of ChatList*/} 
