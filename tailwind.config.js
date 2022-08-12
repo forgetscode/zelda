@@ -1,6 +1,9 @@
 const colors = require('tailwindcss/colors')
 
 module.exports = {
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -21,9 +24,6 @@ module.exports = {
       },
       spacing: {
         88: '22rem',
-      },
-      future: {
-        hoverOnlyWhenSupported: true,
       },
     },
   },
