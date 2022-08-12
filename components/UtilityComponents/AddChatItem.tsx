@@ -5,7 +5,7 @@ const AddChatItem = () => {
     return (
         <>
         <div className="flex flex-row w-full group z-1">
-            <div className=' bg-gray-900 p-1 w-full transition-all 
+            <div className='p-2 w-full transition-all 
                             duration-300 ease-linear cursor-pointer
                             hover:text-white text-teal-500 
                             hover:bg-teal-600
@@ -15,7 +15,7 @@ const AddChatItem = () => {
                             '>
                     <AddIcon w={16} h={16}/>
             </div>
-            <span className="absolute -mt-1 ml-2 left-48 md:left-64 md:ml-8 h-8 p-2 rounded-md shadow-md
+            <span className="absolute -mt-1 ml-2 left-48 md:left-64 md:ml-7 h-8 p-2 rounded-md shadow-md
                               text-white bg-gray-900 
                               text-xs font-bold 
                               z-20

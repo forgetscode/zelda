@@ -6,7 +6,7 @@ const ChatMessages = () => {
     
 
     {/* Display if loading*/}
-    if (!loading){
+    if (loading){
         return (
             <>
 
@@ -32,7 +32,6 @@ const ChatMessages = () => {
 
             {/* Message Span*/}
             <div className="flex items-center justify-center h-full w-full">
-                Messages
             </div>
             {/* End of Message Span*/}
 
