@@ -21,9 +21,6 @@ const ChatMessages = () => {
             </>
         );
     }
-    {/* End of Display if loading*/}
-
-    {/* Display if not loading*/}
     return (
         <>
 

@@ -18,9 +18,13 @@ export const CreateWorkspace = () => {
     const programID = new PublicKey("3Zh7L3EgBgiH3zvebFmUKCxBXZkYRhrG14WAPKXLemzU");              
     const network = clusterApiUrl('devnet');
     const connection = new Connection(network, "processed");
-    const provider = anchor.AnchorProvider.env();
+    const provider = new anchor.AnchorProvider(
+        //@ts-ignore
+        connection, wallet,'confirmed',
+    );
     anchor.setProvider(provider);
     const program = new anchor.Program<Sms2>(idl as any, programID, provider);
     const WorkspaceObject = {wallet, programID, network, connection, provider, program}
     return WorkspaceObject;
 }
+

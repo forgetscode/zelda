@@ -1,52 +1,86 @@
 import { AddIcon, CloseIcon } from '@chakra-ui/icons';
-import { Formik, Form, Field } from "formik";
-import { useEffect, useState } from 'react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as sms from '../../utility/smsTools';
+import { CreateWorkspace } from './CreateWorkspace';
+import { PublicKey } from '@solana/web3.js'
+import * as anchor from "@project-serum/anchor";
+
+interface Input {
+    input:string
+  }
 
 const AddChatItem = () => {
     const [ formState, setFormState] = useState(false);
-    
+    const { publicKey, connected } = useWallet();
 
+    const workspace = CreateWorkspace()
+
+    const { 
+        register, 
+        handleSubmit, 
+        formState: { errors } 
+      } = useForm<Input>();
+
+    const onSubmit: SubmitHandler<Input> = async ({input}) => {
+        const receiver = await new PublicKey(input)
+        const indexInitializer = await sms.getIndexInitializer(publicKey!, workspace) + 1;
+        const indexReceiver = await sms.getIndexReceiver(publicKey!, workspace) + 1;
+        const initializerChat = await sms.GetPDAInitializer(publicKey!, indexInitializer, workspace);
+        const receiverChat = await sms.GetPDAReceiver(receiver, indexReceiver, workspace);
+        const master_id = anchor.web3.Keypair.generate();
+
+        const tx = await workspace.program.methods.initializeChat(indexInitializer, indexReceiver, master_id.publicKey)
+        .accounts(
+          {
+            chatInitializer: initializerChat,
+            chatReceiver: receiverChat,
+            initializer: publicKey!,
+            receiver: receiver,
+            systemProgram: anchor.web3.SystemProgram.programId,
+          },
+        ).rpc();
+
+      }
+    
     if (formState) {
         return (
             <>
-            <div className="flex flex-row w-full group z-1">
-                <button className='p-2 w-full transition-all 
-                                duration-300 ease-linear cursor-pointer
-                                hover:text-white text-teal-500 
-                                hover:bg-teal-600
-                                text-2xl
-                                flex items-center justify-center
-                                ui-monospace
-                                '
+            <div className="group self-center text-teal-500 p-3 bg-gray-900 rounded-full border-teal-500 border 
+            border-opacity-50 z-1 scale-75 hover:bg-teal-500 hover:text-white hober:border-white transition-all">
+                <button 
                         onClick={() => setFormState(true)}>
-    
-                        <AddIcon w={16} h={16}/>
+                        <AddIcon w={22} h={16} className="-mt-1"/>
                 </button>
-                <span className="absolute ml-2 left-48 md:left-64 md:ml-7 h-8 p-2 rounded-md shadow-md
-                                  text-white bg-gray-900 
-                                  text-xs font-bold 
-                                  z-20
-                                  transition-all duration-100 scale-0 origin-left group-hover:scale-100 ">
-                                  Add Chat
-                  </span>
+                <span className="absolute ml-4 -mt-4 h-8 text-center pt-1 w-24 rounded-md shadow-md
+                                text-white bg-gray-900  font-bold 
+                                z-30
+                                transition-all duration-100 scale-0 origin-left group-hover:scale-100 ">
+                                Add Chat
+                </span>
             </div>
 
-            <div className='-ml-16 -mt-16 absolute w-screen h-screen bg-gray-900 bg-opacity-70 z-40'>
-                <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                 bg-gray-900 flex p-6 pl-7 rounded-xl
-                 '>
-                    
+            <div className='fixed -top-7 left-0 w-screen h-screen bg-gray-900 bg-opacity-80' >
+                <div className='z-40 w-screen h-screen' onClick={() => setFormState(false)}></div>
+                <form onSubmit={handleSubmit(onSubmit)} className='absolute top-1/4 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                 bg-gray-900 flex p-6 pl-7 rounded-xl scale-75 md:scale-100 z-50'>
                     <div className='flex flex-col'>
                         <p className='py-2 italic text-lg text-teal-500'>
                         Enter PublicKey
                         </p>
+                        {errors.input && (
+                                <p className="p-1 text-[13px] font-light  text-red-500">
+                                    Please enter a valid publickey.
+                                </p>
+                                )}
                         <div className='flex flex-row pt-2 '>
-                            <input className="flex flex-row px-2 w-64 h-12 border-2 rounded-xl 
+                            <input className="flex flex-row px-2 w-72 h-12 border-2 rounded-xl 
                                 border-teal-500 
                                 shadow-xl bg-gray-800
                                  text-white !focus:border-gray-900
                                 transition-all duration-300 ease-linear cursor-pointer
-                                ">
+                                " {...register("input", {required: true, minLength: 28})}>
                             </input>
                             <button className="h-12 w-20 p-2 ml-5 mt-auto flex-row rounded-lg transition-all
                                 duration-300 ease-linear cursor-pointer
@@ -76,7 +110,7 @@ const AddChatItem = () => {
                     </span>
                     </button>
 
-                </div>
+                </form>
             </div>
 
             </>
@@ -85,23 +119,13 @@ const AddChatItem = () => {
 
     return (
         <>
-        <div className="flex flex-row w-full group z-1">
-            <button className='p-2 w-full transition-all 
-                            duration-300 ease-linear cursor-pointer
-                            hover:text-white text-teal-500 
-                            hover:bg-teal-600
-                            text-2xl
-                            flex items-center justify-center
-                            ui-monospace
-                            '
-                    onClick={() => setFormState(true)}>
-
-                    <AddIcon w={16} h={16}/>
-            </button>
-            <span className="absolute ml-2 left-48 md:left-64 md:ml-7 h-8 p-2 rounded-md shadow-md
-                              text-white bg-gray-900 
-                              text-xs font-bold 
-                              z-20
+        <div className="group self-center text-teal-500 p-3 bg-gray-900 rounded-full border-teal-500 border 
+        border-opacity-50 z-1 scale-75 hover:bg-teal-500 hover:text-white hober:border-white transition-all cursor-pointer"
+        onClick={() => setFormState(true)}>
+                    <AddIcon w={22} h={16} className="-mt-1"/>
+            <span className="absolute ml-4 -mt-1 h-8 text-center pt-1 w-24 rounded-md shadow-md
+                              text-white bg-gray-900  font-bold 
+                              z-30
                               transition-all duration-100 scale-0 origin-left group-hover:scale-100 ">
                               Add Chat
               </span>

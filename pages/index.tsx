@@ -5,15 +5,8 @@ import ParticleBackground from '../components/UtilityComponents/ParticleBackgrou
 const Index: NextPage = () => {
   return (
     <>
-    {/* Index homescreen*/}
-
-      {/* Index homescreen layout*/}
       <div className="flex flex-col justify-center items-center h-screen ml-16">
-
-        {/* Center button + Home screen message*/}
         <div className='scale-75 md:scale-100'>
-
-          {/* Center button*/}
           <div className='flex justify-center'>
             <Link href="https://github.com/forgetscode/zelda">
               <a target="_blank">
@@ -35,28 +28,17 @@ const Index: NextPage = () => {
                                 transition-all duration-100 scale-0 origin-left group-hover:scale-100">
                                 Github
                   </span>
-                  
+          
                 </div>
               </a>
             </Link>
           </div>
-          {/* End of Center button*/}
-          
-          {/* Home screen message*/}
           <p className='mt-8 lg:text-3xl md:text-2xl sm:text-xl text-white font-bold shadow-xl'>Serverless On-chain messaging protocol on Solana</p>
-          {/* End of Home screen message*/}
-
+        </div>
       </div>
-      {/* End of Center button + Home screen message*/}
+    
+      <ParticleBackground/> 
 
-      </div>
-      {/* End of Index homescreen layout*/}
-      
-
-
-      <ParticleBackground/> {/* Background on z-axis*/}
-
-    {/* end of index homescreen*/}
     </>
   );
 }

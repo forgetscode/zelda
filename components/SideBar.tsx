@@ -12,15 +12,11 @@ const SideBar = () => {
     const icon_size = 22;
     return (
         <>
-        {/* Sidebar + Navbar*/}
-
-            {/* Sidebar*/}
             <div className ="fixed top-0 left-0 h-screen w-16 
                             flex flex-col
                             bg-gray-900 text-white shadow-lg mt-16">
                 <hr  className =" self-center w-12 border-gray-500"/>
 
-                {/* Span of icons for Sidebar*/}
                 <Link href="/messages">
                     <a>
                         <SideBarIcon icon = {<EmailIcon boxSize={icon_size}/>} text="Messages"/>
@@ -31,12 +27,8 @@ const SideBar = () => {
                 <SideBarIcon icon = {<MoonIcon boxSize={icon_size}/>} text="Moon"/>
                 <hr  className ="self-center w-12 border-gray-500" />
                 <SideBarIcon icon = {<SettingsIcon boxSize={icon_size}/>} text="Settings"/>
-                {/* End of Span of icons for Sidebar*/}
-
             </div>
-            {/* End of Sidebar*/}
 
-            {/* NavBar*/}
             <div className ="fixed top-0 h-16 w-screen 
                             flex flex-row
                             bg-gray-900 shadow-lg p-2">
@@ -78,12 +70,7 @@ const SideBar = () => {
                             ' />
                 </div>
                 {/* End of Wallet button*/}
-
             </div>
-            {/* End of Navbar*/}
-
-        {/* End of Sidebar + Navbar*/}
-
         </>
     );
 };
