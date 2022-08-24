@@ -15,8 +15,6 @@ type Workspace =  {
 }
 
     export const GetPDAInitializer = async(initializer:PublicKey, chat_id:number, workspace:Workspace) => {
-
-        console.log(initializer)
         const [chat_initializer, _ ] = await PublicKey.findProgramAddress(
         [
             anchor.utils.bytes.utf8.encode("chat_initializer"),
@@ -59,69 +57,93 @@ type Workspace =  {
 
   export const getIndexInitializer = async(account:PublicKey, workspace:Workspace) => {
     let index = 0;
-    for (let i = 1; i < 7; i++) { 
-      let cursor = await GetPDAInitializer(account, i, workspace);
-      try{
-        let data = await workspace.program.account.chat.fetch(cursor);
+    try{
+      for (let i = 1; i < 7; i++) { 
+        let cursor = await GetPDAInitializer(account, i, workspace);
+        try{
+          let data = await workspace.program.account.chat.fetch(cursor);
+        }
+        catch{
+          index = i -1;
+          break
+        }
       }
-      catch{
-        index = i -1;
-        break
-      }
+    }
+    catch(err:any){
+      return(err)
     }
     return index
   }
 
   export const getIndexReceiver = async(account:PublicKey, workspace:Workspace) => {
     let index = 0;
-    for (let i = 1; i < 7; i++) { 
-      let cursor = await GetPDAReceiver(account, i, workspace);
-      try{
-        let data = await workspace.program.account.chat.fetch(cursor);
+    try{
+      for (let i = 1; i < 7; i++) { 
+        let cursor = await GetPDAReceiver(account, i, workspace);
+        try{
+          let data = await workspace.program.account.chat.fetch(cursor);
+        }
+        catch{
+          index = i - 1;
+          break
+        }
       }
-      catch{
-        index = i - 1;
-        break
-      }
+    }
+    catch(err:any){
+      return(err)
     }
     return index
   }
 
   export const getInitializerChats = async(account:PublicKey, workspace:Workspace) => {
     let InitializerChats = []
-    for (let i = 1; i < 7; i++) { 
-      let cursor = await GetPDAInitializer(account, i, workspace);
-      try{
-         await workspace.program.account.chat.fetch(cursor);
-        InitializerChats.push(cursor);
+    try{
+      for (let i = 1; i < 7; i++) { 
+        let cursor = await GetPDAInitializer(account, i, workspace);
+        try{
+          const chatData = await workspace.program.account.chat.fetch(cursor);
+          InitializerChats.push({chatPDA: cursor, data:chatData});
+        }
+        catch{
+          continue
+        }
       }
-      catch{
-        continue
-      }
+    }
+    catch(err:any){
+      return(err)
     }
     return InitializerChats
   }
 
   export const getReceiverChats = async(account:PublicKey, workspace:Workspace) => {
     let receiverChats = []
-    for (let i = 1; i < 7; i++) { 
-      let cursor = await GetPDAReceiver(account, i, workspace);
-      try{
-        await workspace.program.account.chat.fetch(cursor);
-        receiverChats.push(cursor);
+    try{
+      for (let i = 1; i < 7; i++) { 
+        let cursor = await GetPDAReceiver(account, i, workspace);
+        try{
+          const chatData = await workspace.program.account.chat.fetch(cursor);
+          receiverChats.push({chatPDA: cursor, data:chatData});
+        }
+        catch{
+          continue
+        }
       }
-      catch{
-        continue
-      }
+    }
+    catch(err:any){
+      return(err)
     }
     return receiverChats
   }
 
   export const getAccountChats = async(account:PublicKey, workspace:Workspace) => {
-    const initializeChats = await getInitializerChats(account, workspace);
-    const ReceiverChats = await getReceiverChats(account, workspace);
-
-    return initializeChats.concat(ReceiverChats);
+    try{
+      const initializeChats = await getInitializerChats(account, workspace);
+      const ReceiverChats = await getReceiverChats(account, workspace);
+      return initializeChats.concat(ReceiverChats);
+    }
+    catch(err:any){
+      return(424)
+    }
   }
 
   export const getMessagesByChat = async(chatAccountPDA:PublicKey, workspace:Workspace) => {
@@ -147,11 +169,11 @@ type Workspace =  {
     return data
   }
 
-  export const initializeChatDynamic = async(initializer:anchor.web3.Keypair, receiver:PublicKey, workspace:Workspace) => {
-    const indexInitializer = await getIndexInitializer(initializer.publicKey, workspace) + 1;
+  export const initializeChatDynamic = async(initializer:PublicKey, receiver:PublicKey, workspace:Workspace) => {
+    const indexInitializer = await getIndexInitializer(initializer, workspace) + 1;
     const indexReceiver = await getIndexReceiver(receiver, workspace) + 1;
 
-    const initializerChat = await GetPDAInitializer(initializer.publicKey, indexInitializer, workspace);
+    const initializerChat = await GetPDAInitializer(initializer, indexInitializer, workspace);
     const receiverChat = await GetPDAReceiver(receiver, indexReceiver, workspace);
 
     const master_id = anchor.web3.Keypair.generate();
@@ -161,23 +183,23 @@ type Workspace =  {
       {
         chatInitializer: initializerChat,
         chatReceiver: receiverChat,
-        initializer: initializer.publicKey,
+        initializer: initializer,
         receiver: receiver,
         systemProgram: anchor.web3.SystemProgram.programId,
       },
-    ).signers([initializer]).rpc();
+    ).rpc();
 
     return tx;
   }
 
-  export const initializeMessage = async( chatAccountPDA:PublicKey, initializer:anchor.web3.Keypair, text:string, workspace:Workspace) => {
+  export const initializeMessage = async(chatAccountPDA:PublicKey, initializer:PublicKey, text:string, workspace:Workspace) => {
     let initializerChat:PublicKey;
     let receiverChat:PublicKey;
     let receiver:PublicKey;
 
     const chatAccount = await workspace.program.account.chat.fetch(chatAccountPDA);
 
-    if (initializer.publicKey.toBase58() == chatAccount.initializer.toBase58()){
+    if (initializer.toBase58() == chatAccount.initializer.toBase58()){
       initializerChat = await GetPDAInitializer(chatAccount.initializer, chatAccount.chatId, workspace);
       receiverChat = await GetPDAReceiver(chatAccount.receiver, chatAccount.otherChatId, workspace);
       receiver = chatAccount.receiver;
@@ -197,11 +219,11 @@ type Workspace =  {
         message: message_id,
         chatInitializer: initializerChat,
         chatReceiver: receiverChat,
-        initializer: initializer.publicKey,
+        initializer: initializer,
         receiver: receiver,
         systemProgram: anchor.web3.SystemProgram.programId,
       },
-    ).signers([initializer]).rpc();
+    ).rpc();
 
     return tx;
     

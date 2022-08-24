@@ -5,7 +5,6 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as sms from '../../utility/smsTools';
 import { CreateWorkspace } from './CreateWorkspace';
 import { PublicKey } from '@solana/web3.js'
-import * as anchor from "@project-serum/anchor";
 
 interface Input {
     input:string
@@ -14,8 +13,7 @@ interface Input {
 const AddChatItem = () => {
     const [ formState, setFormState] = useState(false);
     const { publicKey, connected } = useWallet();
-
-    const workspace = CreateWorkspace()
+    const workspace = CreateWorkspace();
 
     const { 
         register, 
@@ -25,23 +23,8 @@ const AddChatItem = () => {
 
     const onSubmit: SubmitHandler<Input> = async ({input}) => {
         const receiver = await new PublicKey(input)
-        const indexInitializer = await sms.getIndexInitializer(publicKey!, workspace) + 1;
-        const indexReceiver = await sms.getIndexReceiver(publicKey!, workspace) + 1;
-        const initializerChat = await sms.GetPDAInitializer(publicKey!, indexInitializer, workspace);
-        const receiverChat = await sms.GetPDAReceiver(receiver, indexReceiver, workspace);
-        const master_id = anchor.web3.Keypair.generate();
-
-        const tx = await workspace.program.methods.initializeChat(indexInitializer, indexReceiver, master_id.publicKey)
-        .accounts(
-          {
-            chatInitializer: initializerChat,
-            chatReceiver: receiverChat,
-            initializer: publicKey!,
-            receiver: receiver,
-            systemProgram: anchor.web3.SystemProgram.programId,
-          },
-        ).rpc();
-
+        const tx = await sms.initializeChatDynamic(publicKey!, receiver, workspace)
+        console.log(tx)
       }
     
     if (formState) {
