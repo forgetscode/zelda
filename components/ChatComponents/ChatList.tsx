@@ -6,6 +6,8 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { CreateWorkspace } from "../UtilityComponents/CreateWorkspace";
 import * as sms from '../../utility/smsTools';
 import { PublicKey } from "@solana/web3.js";
+import { useRecoilState } from "recoil";
+import { chatListState } from "../../atoms/Atom";
 
 interface ChatData {
     chatPDA:PublicKey,
@@ -24,6 +26,7 @@ const ChatList = () => {
     const [ loading, setLoading ] = useState(true);
     const [chats, setChats] = useState<ChatData[]>();
     const { publicKey, connected } = useWallet();
+    const [ reloadChatList, setReloadChatList ] = useRecoilState(chatListState)
     const workspace = CreateWorkspace();
 
     
@@ -36,7 +39,7 @@ const ChatList = () => {
         fetchAccountChats().then(() => {
             setLoading(false)
         });
-    }, []);
+    }, [reloadChatList]);
 
 
  
@@ -55,11 +58,17 @@ const ChatList = () => {
 
     return (
         <>
-            <div className='bg-gray-800 w-full h-full flex'> 
-                <div className="flex flex-col w-full mt-20 ml-16 space-y-6">
+            <div className='bg-gray-800 w-full h-full flex '> 
+                <div className="flex flex-col w-full mt-16 ml-16 pr-1 space-y-6 overflow-y-scroll overflow-x-hidden !scrollbar-thin 
+            !scrollbar-thumb-teal-600 transition-all duration-300">
                     {
                         chats?.map((chat) =>(
-                            <ChatItem ID = {chat.data.receiver.toBase58()}></ChatItem>
+                            <ChatItem ID = 
+                            {
+                                chat.data.receiver.toBase58() == publicKey?.toBase58() ? 
+                                chat.data.initializer.toBase58(): chat.data.receiver.toBase58()
+                                
+                            }></ChatItem>
                         ))
                     }
                     <AddChatItem ></AddChatItem>

@@ -20,6 +20,7 @@ require('../styles/globals.css');
 
 import SideBar from '../components/SideBar';
 import { useMemo } from 'react';
+import { RecoilRoot } from 'recoil'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -51,16 +52,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
             <WalletModalProvider>
+            <RecoilRoot>
+                {/* Navigation and sidebar overlayed onto page*/}
+                <SideBar></SideBar>
 
-                  {/* Navigation and sidebar overlayed onto page*/}
-                  <SideBar></SideBar>
-
-                  {/* Screen*/}
-                  <div className='h-screen'>
-                    <Component {...pageProps}/>
-                  </div>
-                  {/*End of Screen*/}
-
+                {/* Screen*/}
+                <div className='h-screen'>
+                  <Component {...pageProps}/>
+                </div>
+                {/*End of Screen*/}
+            </RecoilRoot>
          </WalletModalProvider>
         </WalletProvider>
       </ConnectionProvider>

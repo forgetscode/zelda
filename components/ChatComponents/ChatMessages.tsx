@@ -11,7 +11,7 @@ const ChatMessages = () => {
             <>
 
             {/* Message Box*/}
-            <div className='flex bg-gray-600 w-full h-full'> 
+            <div className='flex bg-gray-600 w-full h-full z-1'> 
                 <div className="flex items-center justify-center mt-10 h-full w-full">
                     <LoadingSpinner sizeOf ={"large"}></LoadingSpinner>
                 </div>
@@ -25,7 +25,7 @@ const ChatMessages = () => {
         <>
 
         {/* Message Box*/}
-        <div className='flex bg-gray-600 w-full h-full'> 
+        <div className='flex bg-gray-600 w-full h-full z-1'> 
 
             {/* Message Span*/}
             <div className="flex items-center justify-center h-full w-full">

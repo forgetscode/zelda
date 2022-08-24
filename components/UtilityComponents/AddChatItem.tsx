@@ -5,6 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as sms from '../../utility/smsTools';
 import { CreateWorkspace } from './CreateWorkspace';
 import { PublicKey } from '@solana/web3.js'
+import { chatListState } from '../../atoms/Atom';
+import { useRecoilState } from 'recoil';
 
 interface Input {
     input:string
@@ -13,6 +15,7 @@ interface Input {
 const AddChatItem = () => {
     const [ formState, setFormState] = useState(false);
     const { publicKey, connected } = useWallet();
+    const [ reloadChatList, setReloadChatList ] = useRecoilState(chatListState)
     const workspace = CreateWorkspace();
 
     const { 
@@ -24,14 +27,15 @@ const AddChatItem = () => {
     const onSubmit: SubmitHandler<Input> = async ({input}) => {
         const receiver = await new PublicKey(input)
         const tx = await sms.initializeChatDynamic(publicKey!, receiver, workspace)
-        console.log(tx)
+        setFormState(false)
+        setReloadChatList(!reloadChatList)
       }
     
     if (formState) {
         return (
             <>
             <div className="group self-center text-teal-500 p-3 bg-gray-900 rounded-full border-teal-500 border 
-            border-opacity-50 z-1 scale-75 hover:bg-teal-500 hover:text-white hober:border-white transition-all">
+            border-opacity-50 z-1 scale-75 hover:bg-teal-500 hover:text-white hober:border-white transition-all ">
                 <button 
                         onClick={() => setFormState(true)}>
                         <AddIcon w={22} h={16} className="-mt-1"/>
@@ -39,15 +43,15 @@ const AddChatItem = () => {
                 <span className="absolute ml-4 -mt-4 h-8 text-center pt-1 w-24 rounded-md shadow-md
                                 text-white bg-gray-900  font-bold 
                                 z-30
-                                transition-all duration-100 scale-0 origin-left group-hover:scale-100 ">
+                                transition-all duration-100 scale-0 origin-left group-hover:scale-100">
                                 Add Chat
                 </span>
             </div>
 
-            <div className='fixed -top-7 left-0 w-screen h-screen bg-gray-900 bg-opacity-80' >
+            <div className='fixed top-9  w-screen h-screen bg-gray-900 bg-opacity-80' >
                 <div className='z-40 w-screen h-screen' onClick={() => setFormState(false)}></div>
                 <form onSubmit={handleSubmit(onSubmit)} className='absolute top-1/4 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                 bg-gray-900 flex p-6 pl-7 rounded-xl scale-75 md:scale-100 z-50'>
+                 bg-gray-900 flex p-6 pl-7 rounded-xl scale-75 md:scale-100 z-50 -ml-16 -mt-16'>
                     <div className='flex flex-col'>
                         <p className='py-2 italic text-lg text-teal-500'>
                         Enter PublicKey
@@ -87,7 +91,6 @@ const AddChatItem = () => {
                         <span className="absolute ml-6 -mt-2 h-8 p-2 rounded-md shadow-md
                                     text-white bg-gray-900 
                                     text-xs font-bold 
-                                    z-20
                                     transition-all duration-100 scale-0 origin-left group-hover:scale-100 ">
                                     Close
                     </span>
@@ -106,9 +109,8 @@ const AddChatItem = () => {
         border-opacity-50 z-1 scale-75 hover:bg-teal-500 hover:text-white hober:border-white transition-all cursor-pointer"
         onClick={() => setFormState(true)}>
                     <AddIcon w={22} h={16} className="-mt-1"/>
-            <span className="absolute ml-4 -mt-1 h-8 text-center pt-1 w-24 rounded-md shadow-md
+            <span className="absolute -ml-14 -mt-12 h-8 text-center pt-1 w-24 rounded-md shadow-md
                               text-white bg-gray-900  font-bold 
-                              z-30
                               transition-all duration-100 scale-0 origin-left group-hover:scale-100 ">
                               Add Chat
               </span>

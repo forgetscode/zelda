@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer components {
   .sidebar-icon {
     @apply relative flex items-center justify-center

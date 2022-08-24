@@ -14,7 +14,7 @@ const SideBar = () => {
         <>
             <div className ="fixed top-0 left-0 h-screen w-16 
                             flex flex-col
-                            bg-gray-900 text-white shadow-lg mt-16">
+                            bg-gray-900 text-white shadow-lg mt-16 z-50">
                 <hr  className =" self-center w-12 border-gray-500"/>
 
                 <Link href="/messages">
