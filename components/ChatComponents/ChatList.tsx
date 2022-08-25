@@ -61,7 +61,8 @@ const ChatList = () => {
             <div className='bg-gray-800 w-full h-full flex '> 
                 <div className="flex flex-col w-full mt-16 ml-16 pr-1 space-y-6 overflow-y-scroll overflow-x-hidden !scrollbar-thin 
             !scrollbar-thumb-teal-600 transition-all duration-300">
-                    {
+                    {   
+                        (chats!.length > 0) ?
                         chats?.map((chat) =>(
                             <ChatItem ID = 
                             {
@@ -69,7 +70,7 @@ const ChatList = () => {
                                 chat.data.initializer.toBase58(): chat.data.receiver.toBase58()
                                 
                             }></ChatItem>
-                        ))
+                        )) : <div className="mt-4 h-12"/>
                     }
                     <AddChatItem ></AddChatItem>
                 </div>
