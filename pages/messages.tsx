@@ -12,8 +12,9 @@ const Messages: NextPage = () => {
 
   if (!publicKey){
     return(
-        <div className="flex flex-col w-screen h-screen items-center justify-center bg-gray-600 space-y-6">
-          <p className='md:text-2xl sm:text-xl text-teal-500 font-bold'>
+        <div className="flex flex-col w-screen h-screen items-center justify-center bg-gray-600 space-y-6 pl-16 ">
+          
+          <p className='md:text-2xl text-md text-teal-400 font-bold font-mono'>
             Please connect your wallet
           </p>
           <LoadingSpinner sizeOf ={'large'}></LoadingSpinner>
