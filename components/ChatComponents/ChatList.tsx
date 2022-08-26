@@ -49,14 +49,14 @@ const ChatList = () => {
         return (
             <>
             <div className={`bg-gray-800 lg:w-64 w-32 -mt-16 h-screen flex origin-left transition-all ${chatBarState ?"ml-0" : "lg:-ml-64 -ml-32"}`}> 
-                <div className="relative flex items-center justify-center h-screen w-full border border-gray-900 shadow-lg z-10">
+                <div className="relative flex items-center justify-center h-screen w-full border-2 border-gray-900">
                     <LoadingSpinner sizeOf ={'medium'}></LoadingSpinner>
                 </div>
                 <div className='flex flex-row group'>
                     <button onClick={() => setChatBarState(!chatBarState)} className="absolute h-12 
                         top-1/2 -translate-y-1/2 bg-gray-800 p-1 rounded-r-lg transition-all 
                         duration-300 ease-linear cursor-pointer hover:bg-teal-600
-                    hover:text-white text-teal-500 italic text-sm border-l-0 border-gray-900 shadow-lg z-20 -ml-1
+                    hover:text-white text-teal-500 italic text-sm border-l-0 border-2 border-gray-900 z-20 -ml-1
                         ">
                         <p>{ chatBarState ? "<" :  ">"}</p>
                         <span className="absolute top-1/2 -translate-y-1/2 h-8 w-auto p-2 min-w-max left-5 rounded-md shadow-md
@@ -77,8 +77,8 @@ const ChatList = () => {
     return (
         <>
         <div className={`bg-gray-800 lg:w-64 w-32 -mt-16 h-screen flex origin-left transition-all ${chatBarState ?"ml-0" : "lg:-ml-64 -ml-32"}`}> 
-            <div className="z-10 origin-top pt-16 flex flex-col w-full pr-1 space-y-6 overflow-y-scroll overflow-x-hidden !scrollbar-thin 
-            !scrollbar-thumb-teal-600 transition-all duration-300 border border-gray-900 shadow-lg">
+            <div className=" origin-top pt-16 flex flex-col w-full pr-1 space-y-6 overflow-y-scroll overflow-x-hidden !scrollbar-thin 
+            !scrollbar-thumb-teal-600 transition-all duration-300 border-2 border-gray-900">
                 {   
                     (chats!.length > 0) ?
                     chats?.map((chat) =>(
@@ -96,7 +96,7 @@ const ChatList = () => {
                 <button onClick={() => setChatBarState(!chatBarState)} className="absolute h-12 
                     top-1/2 -translate-y-1/2 bg-gray-800 p-1 rounded-r-lg transition-all 
                     duration-300 ease-linear cursor-pointer hover:bg-teal-600
-                hover:text-white text-teal-500 italic text-sm border-l-0 border-gray-900 shadow-lg z-20 -ml-1
+                hover:text-white text-teal-500 italic text-sm border-l-0 border-2 border-gray-900 -ml-1
                     ">
                     <p>{ chatBarState ? "<" :  ">"}</p>
                     <span className="absolute top-1/2 -translate-y-1/2 h-8 w-auto p-2 min-w-max left-5 rounded-md shadow-md
