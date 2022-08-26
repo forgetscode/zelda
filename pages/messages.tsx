@@ -1,6 +1,7 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import type { NextPage } from 'next'
 import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 import ChatList from '../components/ChatComponents/ChatList';
 import ChatMessages from '../components/ChatComponents/ChatMessages';
 import LoadingSpinner from '../components/UtilityComponents/LoadingSpinner';
@@ -20,12 +21,11 @@ const Messages: NextPage = () => {
         </div>
     )
   }
-  {/* Message area if ChatList hidden*/}
 
   return (
-    <> 
-    {/* Message area Layout if hidden*/}                   
+    <>              
     <div className='pl-16 pt-16'>
+      <Toaster/>
       <div className="absolute z-30">
         <ChatList/>
       </div>
@@ -34,9 +34,8 @@ const Messages: NextPage = () => {
           <ChatMessages/>
       </div>
 
-      
     </div>
-      </>
+     </>
   );
 }
 

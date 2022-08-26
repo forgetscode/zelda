@@ -4,6 +4,15 @@ import { useWallet, WalletContextState } from "@solana/wallet-adapter-react";
 import { clusterApiUrl, Connection } from "@solana/web3.js";
 import { Sms2 } from '../target/types/sms2';
 
+interface ChatData {
+  bump:number,
+  chatId:number,
+  initializer:PublicKey,
+  masterId:PublicKey,
+  messageCount:number,
+  otherChatId:number,
+  receiver:PublicKey
+}
   
 type Workspace =  {
     wallet: WalletContextState;
@@ -14,7 +23,7 @@ type Workspace =  {
     program: anchor.Program<Sms2>;
 }
 
-    export const GetPDAInitializer = async(initializer:PublicKey, chat_id:number, workspace:Workspace) => {
+  export const GetPDAInitializer = async(initializer:PublicKey, chat_id:number, workspace:Workspace) => {
         const [chat_initializer, _ ] = await PublicKey.findProgramAddress(
         [
             anchor.utils.bytes.utf8.encode("chat_initializer"),
@@ -28,7 +37,6 @@ type Workspace =  {
   }
 
   export const GetPDAReceiver = async(receiver:PublicKey, chat_id:number, workspace:Workspace) => {
-
     const [chat_receiver, _ ] = await PublicKey.findProgramAddress(
       [
         anchor.utils.bytes.utf8.encode("chat_receiver"),
@@ -37,7 +45,6 @@ type Workspace =  {
       ],
       workspace.program.programId
     )
-
     return chat_receiver;
   }
 
@@ -78,7 +85,7 @@ type Workspace =  {
   export const getIndexReceiver = async(account:PublicKey, workspace:Workspace) => {
     let index = 0;
     try{
-      for (let i = 1; i < 7; i++) { 
+      for (let i = 1; i < 13; i++) { 
         let cursor = await GetPDAReceiver(account, i, workspace);
         try{
           let data = await workspace.program.account.chat.fetch(cursor);
@@ -118,7 +125,7 @@ type Workspace =  {
   export const getReceiverChats = async(account:PublicKey, workspace:Workspace) => {
     let receiverChats = []
     try{
-      for (let i = 1; i < 7; i++) { 
+      for (let i = 1; i < 13; i++) { 
         let cursor = await GetPDAReceiver(account, i, workspace);
         try{
           const chatData = await workspace.program.account.chat.fetch(cursor);
@@ -229,3 +236,48 @@ type Workspace =  {
     
   }
 
+  export const closeChat = async(otherID:PublicKey, chatPDA:PublicKey, chatData:ChatData, workspace:Workspace) => {
+    let initializer:PublicKey
+    let PDAInitializedChat:PublicKey
+    let PDAReceivedChat:PublicKey
+
+    if (otherID.toBase58() == chatData.initializer.toBase58()){
+      initializer = chatData.receiver
+      PDAInitializedChat = await GetPDAInitializer(chatData.initializer, chatData.otherChatId, workspace)
+      PDAReceivedChat = chatPDA
+    }
+
+    else{
+      initializer = chatData.initializer
+      PDAInitializedChat = chatPDA
+      PDAReceivedChat = await GetPDAReceiver(chatData.receiver, chatData.otherChatId, workspace)
+    } 
+
+    const tx = await workspace.program.methods.closeChat()
+    .accounts(
+      {
+        chatInitializer: PDAInitializedChat,
+        chatReceiver: PDAReceivedChat,
+        initializer: initializer,
+        receiver: chatData.initializer,
+        systemProgram: anchor.web3.SystemProgram.programId,
+      },
+    ).rpc();
+
+    return tx
+  }
+
+  export const handleChainError = (err:any) =>{
+    if (err.toString().includes("0x1")){
+        return("Insufficient funds.");
+    }
+    else if (err.toString().includes("User rejected the request.")){
+        return("Transaction cancelled.");
+    }
+    else if (err.toString().includes("Error processing Instruction 0: custom program error: 0x0")){
+      return("Maximum active chat accounts reached for either receiving(12) or initializing chats(6).")
+    }
+    else{   
+        return("Transaction cancelled"+ err.toString());
+    }
+  }

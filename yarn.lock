@@ -3212,6 +3212,11 @@ globby@^11.0.4:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
+goober@^2.1.10:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.1.11.tgz#bbd71f90d2df725397340f808dbe7acc3118e610"
+  integrity sha512-5SS2lmxbhqH0u9ABEWq7WPU69a4i2pYcHeCxqaNq6Cw3mnrF0ghWNM4tEGid4dKy8XNIAUbuThuozDHHKJVh3A==
+
 hamt_plus@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/hamt_plus/-/hamt_plus-1.0.2.tgz#e21c252968c7e33b20f6a1b094cd85787a265601"
@@ -4344,6 +4349,13 @@ react-hook-form@^7.34.2:
   version "7.34.2"
   resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.34.2.tgz"
   integrity sha512-1lYWbEqr0GW7HHUjMScXMidGvV0BE2RJV3ap2BL7G0EJirkqpccTaawbsvBO8GZaB3JjCeFBEbnEWI1P8ZoLRQ==
+
+react-hot-toast@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-hot-toast/-/react-hot-toast-2.3.0.tgz#70b3d183ac2a4afb6b17cda4a7f4cfe02e730415"
+  integrity sha512-/RxV+bfjld7tSJR1SCLzMAXgFuNW7fCpK6+vbYqfmbGSWcqTMz2rizrvfWKvtcPH5HK0NqxmBaC5SrAy1F42zA==
+  dependencies:
+    goober "^2.1.10"
 
 react-icons@^4.3.1:
   version "4.3.1"
