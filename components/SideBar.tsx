@@ -31,7 +31,7 @@ const SideBar = () => {
 
             <div className ="fixed top-0 h-16 w-screen 
                             flex flex-row
-                            bg-gray-900 shadow-lg p-2">
+                            bg-gray-900 shadow-lg p-2 z-50">
 
                 {/* Homepage button*/}
                 <div className='group flex justify-center'>

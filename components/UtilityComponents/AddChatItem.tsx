@@ -42,8 +42,8 @@ const AddChatItem = () => {
                 </button>
                 <span className="absolute ml-4 -mt-4 h-8 text-center pt-1 w-24 rounded-md shadow-md
                                 text-white bg-gray-900  font-bold 
-                                z-30
-                                transition-all duration-100 scale-0 origin-left group-hover:scale-100">
+                                z-30 origin-top
+                                transition-all duration-100 scale-0 group-hover:scale-100">
                                 Add Chat
                 </span>
             </div>
@@ -51,13 +51,13 @@ const AddChatItem = () => {
             <div className='fixed top-9  w-screen h-screen bg-gray-900 bg-opacity-80' >
                 <div className='z-40 w-screen h-screen' onClick={() => setFormState(false)}></div>
                 <form onSubmit={handleSubmit(onSubmit)} className='absolute top-1/4 lg:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                 bg-gray-900 flex p-6 pl-7 rounded-xl scale-75 md:scale-100 z-50 -ml-16 -mt-16'>
+                 bg-gray-900 flex p-6 pl-7 rounded-xl scale-[60%] transition-all md:scale-75 lg:scale-100 z-50 -ml-16 -mt-16'>
                     <div className='flex flex-col'>
-                        <p className='py-2 italic text-lg text-teal-500'>
+                        <p className='py-2  font-light font-mono text-lg text-teal-500'>
                         Enter PublicKey
                         </p>
                         {errors.input && (
-                                <p className="p-1 text-[13px] font-light  text-red-500">
+                                <p className="p-1 text-[13px]  text-red-500">
                                     Please enter a valid publickey.
                                 </p>
                                 )}
@@ -71,7 +71,7 @@ const AddChatItem = () => {
                             </input>
                             <button className="h-12 w-20 p-2 ml-5 mt-auto flex-row rounded-lg transition-all
                                 duration-300 ease-linear cursor-pointer
-                                bg-teal-600
+                                bg-teal-600 font-thin font-mono
                                 text-white hover:text-teal-500 
                                 hover:bg-gray-900 hover:scale-105
                                 "> 
@@ -105,11 +105,11 @@ const AddChatItem = () => {
 
     return (
         <>
-        <div className="group self-center text-teal-500 p-3 bg-gray-900 rounded-full border-teal-500 border 
-        border-opacity-50 z-1 scale-75 hover:bg-teal-500 hover:text-white hober:border-white transition-all cursor-pointer"
+        <div className="group self-center text-teal-500 p-6 bg-gray-900 rounded-full border-teal-500 border 
+        border-opacity-50 z-1 scale-75 flex items-center justify-center hover:bg-teal-500 hover:text-white hober:border-white transition-all cursor-pointer"
         onClick={() => setFormState(true)}>
-                    <AddIcon w={22} h={16} className="-mt-1"/>
-            <span className="absolute -ml-14 -mt-12 h-8 text-center pt-1 w-24 rounded-md shadow-md
+                    <AddIcon w={22} h={16} className=" absolute"/>
+            <span className="absolute -mt-16 h-8 text-center pt-1 w-24 rounded-md shadow-md
                               text-white bg-gray-900  font-bold 
                               transition-all duration-100 scale-0 origin-left group-hover:scale-100 ">
                               Add Chat
