@@ -277,6 +277,9 @@ type Workspace =  {
     else if (err.toString().includes("Error processing Instruction 0: custom program error: 0x0")){
       return("Maximum active chat accounts reached for either receiving(12) or initializing chats(6).")
     }
+    else if (err.toString().includes("cancelledWalletSignTransactionError")){
+      return("Wallet connection not found, check that you are connected.")
+    }
     else{   
         return("Transaction cancelled"+ err.toString());
     }

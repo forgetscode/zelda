@@ -52,7 +52,7 @@ const ChatList = () => {
                     <button onClick={() => setChatBarState(!chatBarState)} className="absolute h-12 
                         top-1/2 -translate-y-1/2 bg-gray-800 p-1 rounded-r-lg transition-all 
                         duration-300 ease-linear cursor-pointer hover:bg-teal-600
-                    hover:text-white text-teal-500 italic text-sm  border-r border-gray-900
+                    hover:text-white text-teal-500 text-sm  border-r border-gray-900
                         ">
                         <p>{ chatBarState ? "<" :  ">"}</p>
                         <span className="absolute top-1/2 -translate-y-1/2 h-8 w-auto p-2 min-w-max left-5 rounded-md shadow-md
@@ -97,7 +97,7 @@ const ChatList = () => {
                 <button onClick={() => setChatBarState(!chatBarState)} className="absolute h-12 
                     top-1/2 -translate-y-1/2 bg-gray-800 p-1 rounded-r-lg transition-all 
                     duration-300 ease-linear cursor-pointer hover:bg-teal-600
-                hover:text-white text-teal-500 italic text-sm border-r border-gray-900
+                hover:text-white text-teal-500 text-sm border-r border-gray-900
                     ">
                     <p>{ chatBarState ? "<" :  ">"}</p>
                     <span className="absolute top-1/2 -translate-y-1/2 h-8 w-auto p-2 min-w-max left-5 rounded-md shadow-md
