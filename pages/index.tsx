@@ -43,7 +43,7 @@ const Index: NextPage = () => {
         </div>
       </div>
     
-      <ParticleBackground/> 
+      <ParticleBackground/>
 
     </>
   );

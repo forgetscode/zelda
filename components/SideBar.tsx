@@ -7,9 +7,12 @@ import React from 'react'
 import Link from 'next/link';
 
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useRecoilState } from 'recoil';
+import { openChatState } from '../atoms/Atom';
 
 const SideBar = () => {
     const icon_size = 22;
+    const [ chatBarState, setChatBarState] = useRecoilState(openChatState);
     return (
         <>
             <div className ="fixed top-0 left-0 h-screen w-16 
@@ -18,7 +21,7 @@ const SideBar = () => {
                 <hr  className =" self-center w-12 border-gray-500"/>
 
                 <Link href="/messages">
-                    <a>
+                    <a onClick={() => setChatBarState(true)}>
                         <SideBarIcon icon = {<EmailIcon boxSize={icon_size}/>} text="Messages"/>
                     </a>
                 </Link>

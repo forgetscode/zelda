@@ -7,7 +7,8 @@ import { CreateWorkspace } from "../UtilityComponents/CreateWorkspace";
 import * as sms from '../../utility/smsTools';
 import { PublicKey } from "@solana/web3.js";
 import { useRecoilState } from "recoil";
-import { chatListState } from "../../atoms/Atom";
+import { activeChatState, chatListState, openChatState } from "../../atoms/Atom";
+import { background } from "@chakra-ui/react";
 
 interface ChatData {
     chatPDA:PublicKey,
@@ -26,8 +27,8 @@ const ChatList = () => {
     const [ loading, setLoading ] = useState(true);
     const [chats, setChats] = useState<ChatData[]>();
     const { publicKey, connected } = useWallet();
+    const [ chatBarState, setChatBarState] = useRecoilState(openChatState);
     const [ reloadChatList, setReloadChatList ] = useRecoilState(chatListState);
-    const [ chatBarState, setChatBarState] = useState(true);
     const workspace = CreateWorkspace();
 
     const fetchAccountChats = async () =>{
@@ -36,6 +37,7 @@ const ChatList = () => {
     }
 
     useEffect(() => {
+        setLoading(true)
         fetchAccountChats().then(() => {
             setLoading(false)
         });
@@ -64,7 +66,6 @@ const ChatList = () => {
                     </button>
                 </div>
             </div>
-
             </>
         );
     }
@@ -74,11 +75,12 @@ const ChatList = () => {
         <>
         <div className={`bg-gray-800 lg:w-64 w-32 -mt-16 h-screen flex origin-left transition-all ${chatBarState ?"ml-0" : "lg:-ml-64 -ml-32"}`}> 
             <div className=" origin-top pt-16 flex flex-col w-full pr-1 space-y-6 overflow-y-scroll overflow-x-hidden !scrollbar-thin 
-            !scrollbar-thumb-teal-600 transition-all duration-300 border-r border-gray-900 ">
+            !scrollbar-thumb-teal-600 transition-all duration-300 border-r border-gray-900">
                 {   
                     (chats!.length > 0) ?
                     chats?.map((chat) =>(
                         <ChatItem 
+                            key = {chat.chatPDA.toBase58()}
                             ID = 
                             {
                                 chat.data.receiver.toBase58() == publicKey?.toBase58() ? 

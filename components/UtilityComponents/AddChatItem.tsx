@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as sms from '../../utility/smsTools';
 import { CreateWorkspace } from './CreateWorkspace';
-import { PublicKey } from '@solana/web3.js'
 import { chatListState } from '../../atoms/Atom';
 import { useRecoilState } from 'recoil';
 import { notifyFailure, notifyPending, notifySuccess } from './Notifications';
@@ -15,9 +14,9 @@ interface Input {
   }
 
 const AddChatItem = () => {
-    const [ formState, setFormState] = useState(false);
-    const { publicKey, connected } = useWallet();
-    const [ reloadChatList, setReloadChatList ] = useRecoilState(chatListState)
+    const [formState, setFormState] = useState(false);
+    const {publicKey} = useWallet();
+    const [reloadChatList, setReloadChatList] = useRecoilState(chatListState)
     const workspace = CreateWorkspace();
 
     const { 
@@ -27,7 +26,11 @@ const AddChatItem = () => {
       } = useForm<Input>();
 
     const onSubmit: SubmitHandler<Input> = async ({input}) => {
-        const receiver = await new PublicKey(input)
+        const receiver = await sms.MakePublicKey(input)
+        if(receiver == false){
+            notifyFailure("Error: Invalid PublicKey");
+            return
+        }
         setFormState(false)
         const pendingTransction = notifyPending()
         try{

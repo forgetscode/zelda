@@ -1,12 +1,10 @@
-import { CloseIcon, CopyIcon, SmallCloseIcon } from '@chakra-ui/icons';
-import { useWallet } from '@solana/wallet-adapter-react';
+import { CloseIcon, CopyIcon } from '@chakra-ui/icons';
 import { PublicKey } from '@solana/web3.js';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRecoilState } from 'recoil';
-import { chatListState } from '../../atoms/Atom';
+import { chatListState, activeChatState} from '../../atoms/Atom';
 import { notifyFailure, notifyPending, notifySuccess } from './Notifications';
 import * as sms from '../../utility/smsTools';
-import { workspace } from '@project-serum/anchor';
 import { CreateWorkspace } from './CreateWorkspace';
 
 interface ChatInfo {
@@ -25,12 +23,22 @@ interface ChatInfo {
 
 const ChatItem:React.FC<ChatInfo> =({ID, chatPDA, data}: ChatInfo) => {
     
-    const [ reloadChatList, setReloadChatList ] = useRecoilState(chatListState)
-    const { publicKey, connected } = useWallet();
+    const [reloadChatList, setReloadChatList] = useRecoilState(chatListState)
+    const [activeChat, setActiveChat] = useRecoilState(activeChatState)
     const workspace = CreateWorkspace();
+
+    const chatData = {
+        ID,
+        chatPDA,
+        data
+    }
     
     const onDelete = async () => {
-        const otherID = await new PublicKey(ID)
+        const otherID = await sms.MakePublicKey(ID)
+        if(otherID == false){
+            notifyFailure("Error: Invalid PublicKey");
+            return
+        }
         const pendingTransction = notifyPending()
         try{
             const tx = await sms.closeChat(otherID, chatPDA, data, workspace)
@@ -55,8 +63,9 @@ const ChatItem:React.FC<ChatInfo> =({ID, chatPDA, data}: ChatInfo) => {
     return (
         <>
         <Toaster/>
-        <div className="flex flex-row self-center items-center w-5/6 p-2 mt-4 h-12 text-center space-x-1
-        rounded-xl text-teal-500  bg-gray-900 hover:bg-teal-600 transition-all hover:text-white justify-between">
+        <div className={`flex flex-row self-center items-center w-5/6 p-2 mt-4 h-12 text-center space-x-1
+        rounded-xl   hover:bg-teal-600 transition-all hover:text-white justify-between
+        ${activeChat?.chatPDA == chatData.chatPDA ? "bg-teal-600 text-white" : "bg-gray-900 text-teal-500 "}`}>
             <div className="group mb-1
                     ">
                 <CopyIcon w={14} h={14} className='cursor-pointer hover:scale-110 hover:text-black'
@@ -71,7 +80,9 @@ const ChatItem:React.FC<ChatInfo> =({ID, chatPDA, data}: ChatInfo) => {
             <div className="
                         w-12 text-sm md:w-36 truncate ... 
                         rounded-xl p-1
-                        cursor-pointer">
+                        cursor-pointer"
+                        onClick={() => {setActiveChat(chatData)}}
+                        >
                 {ID}
             </div>
             <div className="

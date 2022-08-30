@@ -23,6 +23,16 @@ type Workspace =  {
     program: anchor.Program<Sms2>;
 }
 
+  export const MakePublicKey = async(key:string | PublicKey) => {
+    try{
+      key = await new PublicKey(key)
+    }
+    catch{
+      return false
+    }
+    return key
+  }
+
   export const GetPDAInitializer = async(initializer:PublicKey, chat_id:number, workspace:Workspace) => {
         const [chat_initializer, _ ] = await PublicKey.findProgramAddress(
         [
@@ -153,27 +163,39 @@ type Workspace =  {
     }
   }
 
+  const resolvePDAMessage = async(masterId:PublicKey, index:number, workspace:Workspace) => {
+    try{
+      let messagePDA = await GetPDAMessage(masterId, index, workspace);
+      let messageData = await workspace.program.account.message.fetch(messagePDA);
+      return{
+        index:index,
+        PDA:messagePDA,
+        data:messageData,
+      }
+    }
+    catch(err){
+      return index
+    }
+  }
+
   export const getMessagesByChat = async(chatAccountPDA:PublicKey, workspace:Workspace) => {
+    type MessageData = {
+      index: number, 
+      PDA: PublicKey, 
+      data: any
+    }
 
     const chatAccount = await workspace.program.account.chat.fetch(chatAccountPDA);
 
-    const data = [];
+    const data: Promise<MessageData | number >[] = [];
 
     for (let i=0; i <= chatAccount.messageCount; i++){
-      try{
-        let messagePDA = await GetPDAMessage(chatAccount.masterId, i, workspace);
-        let messageData = await workspace.program.account.message.fetch(messagePDA);
-        data.push({
-          PDA:messagePDA,
-          data:messageData,
-        });
-      }
-      catch{
-        continue;
-      }
+      data.push(resolvePDAMessage(chatAccount.masterId, i, workspace))
     }
-    
-    return data
+
+    const resolvedData = (await Promise.all(data)).filter((x): x is MessageData => typeof x !== "number").sort((a, b) => a.index < b.index ? -1 : 1)
+
+    return resolvedData
   }
 
   export const initializeChatDynamic = async(initializer:PublicKey, receiver:PublicKey, workspace:Workspace) => {
@@ -236,6 +258,19 @@ type Workspace =  {
     
   }
 
+  export const closeMessage = async(messagePDA:PublicKey, initializer:PublicKey, workspace:Workspace) => {
+    const tx = await workspace.program.methods.closeMessage()
+    .accounts(
+      {
+        message: messagePDA,
+        initializer: initializer,
+        systemProgram: anchor.web3.SystemProgram.programId,
+      },
+    ).rpc();
+    
+    return tx
+  }
+
   export const closeChat = async(otherID:PublicKey, chatPDA:PublicKey, chatData:ChatData, workspace:Workspace) => {
     let initializer:PublicKey
     let PDAInitializedChat:PublicKey
@@ -253,7 +288,7 @@ type Workspace =  {
       PDAReceivedChat = await GetPDAReceiver(chatData.receiver, chatData.otherChatId, workspace)
     } 
 
-    const tx = await workspace.program.methods.closeChat()
+    const tx =  await workspace.program.methods.closeChat()
     .accounts(
       {
         chatInitializer: PDAInitializedChat,
@@ -279,6 +314,9 @@ type Workspace =  {
     }
     else if (err.toString().includes("cancelledWalletSignTransactionError")){
       return("Wallet connection not found, check that you are connected.")
+    }
+    else if (err.toString().includes("2003")){
+      return("You can already talk to yourself.")
     }
     else{   
         return("Transaction cancelled"+ err.toString());

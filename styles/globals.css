@@ -22,4 +22,12 @@
     text-xs font-bold 
     transition-all duration-100 scale-0 origin-left;
   }
+
+  .message-received {
+    @apply bg-teal-700 shadow-lg  hover:bg-teal-800 rounded-lg text-center text-white p-3 flex max-w-sm md:max-w-md overflow-clip break-all;
+  }
+
+  .message-sent {
+    @apply bg-gray-700 shadow-lg hover:bg-gray-900 rounded-lg text-white p-3 justify-end flex max-w-sm md:max-w-md overflow-clip break-all;
+  }
 }

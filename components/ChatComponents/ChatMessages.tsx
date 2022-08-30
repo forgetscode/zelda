@@ -1,15 +1,66 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { useState } from "react";
+import { workspace } from "@project-serum/anchor";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { PublicKey } from "@solana/web3.js";
+import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useRecoilState } from "recoil";
+import { activeChatState, messageListState } from "../../atoms/Atom";
+import * as sms from '../../utility/smsTools';
+import { CreateWorkspace } from "../UtilityComponents/CreateWorkspace";
 import LoadingSpinner from "../UtilityComponents/LoadingSpinner";
+import Message from "../UtilityComponents/Message";
+import { notifyFailure, notifyPending, notifySuccess } from "../UtilityComponents/Notifications";
+
+interface MessageData {
+    PDA:PublicKey,
+    data: {
+        bump:number,
+        initializer:PublicKey,
+        masterId: PublicKey,
+        message: string,
+        messageId: number
+    }
+}
 
 interface Input {
     input:string
   }
 
 const ChatMessages = () => {
-    const [ loading, setLoading ] = useState(false);
+    const [loading, setLoading ] = useState(false);
     const [count, setCount] = useState(0);
+    const {publicKey} = useWallet();
+    const [activeChat] = useRecoilState(activeChatState)
+    const [reloadMessageList, setReloadMessageList] = useRecoilState(messageListState);
+    const [messages, setMessages] = useState<MessageData[] | null>();
+    const workspace = CreateWorkspace();
+
+    
+    const fetchChatMessages= async () =>{
+        setLoading(true)
+        if(activeChat != null){
+            const data= await sms.getMessagesByChat(activeChat?.chatPDA!, workspace)
+            setMessages(data)
+        }
+        else{
+            return
+        }
+    }
+
+    useEffect(() => {
+        fetchChatMessages().then(() => {
+            setLoading(false)
+        });
+    }, [ activeChat, reloadMessageList]);
+
+
+    useEffect(()=> {
+        const element = document.getElementById("scroll-bottom")
+        element?.scrollIntoView(false)
+    }, [messages]);
+      
 
     const { 
         register, 
@@ -18,38 +69,110 @@ const ChatMessages = () => {
       } = useForm<Input>();
 
     const onSubmit: SubmitHandler<Input> = async ({input}) => {
-        console.log(input)
+        if (activeChat == null) return
+        const pendingTransction = notifyPending()
+        try{
+            const tx = await sms.initializeMessage(activeChat?.chatPDA!, publicKey!, input, workspace)
+            const confirmation = await workspace.connection.confirmTransaction(tx, 'processed')
+            if(!confirmation.value.err){
+                toast.dismiss(pendingTransction)
+                notifySuccess("Message sent.")
+                const textarea =(document.getElementById('message-area') as HTMLInputElement)
+                textarea.value = ''
+                setCount(0)
+                setReloadMessageList(!reloadMessageList)
+            }
+            else{
+                toast.dismiss(pendingTransction)
+                notifyFailure("Transaction Error: "+confirmation.value.err.toString())
+            }
+        }
+        catch(err:any){
+            toast.dismiss(pendingTransction)
+            const errorType = sms.handleChainError(err)
+            notifyFailure("Error: " + errorType)
+        }
       }
+      
     
-
-    {/* Display if loading*/}
-    if (loading){
+    if (!messages && loading){
         return (
             <>
+            <div className="absolute h-full w-full -ml-16 -mt-16 flex flex-col">
+                <div className = "pl-16 pt-16 h-full w-full bg-gray-600">
+                    {
+                        activeChat !=  null
+                        ? 
+                            <div className="border-b shadow-md border-teal-700 text-sm
+                            p-2 font-mono text-white
+                            bg-gray-700 h-16 mb-2 bg-opacity-80 flex-col items-center justify-center ">
 
-            {/* Message Box*/}
-            <div className='flex bg-gray-600 w-full h-full z-1'> 
-                <div className="flex items-center justify-center mt-10 h-full w-full">
-                    <LoadingSpinner sizeOf ={"large"}></LoadingSpinner>
+                                    <p className="text-teal-500 ">Chat with: </p>
+                                    <p className=" "> {activeChat.ID} </p>
+                            </div>
+                        :
+                        ""
+                    }
+                    <div className="flex -ml-16 -mt-16 h-full items-center justify-center">
+                        <LoadingSpinner sizeOf ={"large"}></LoadingSpinner>
+                    </div>
+                    <div id={"scroll-bottom"}></div>
                 </div>
+                <form onSubmit={handleSubmit(onSubmit)} className='flex flex-row pl-[88px] p-6 bg-gray-900 w-full mx-auto'>
+                    <textarea id ="message-area" className='relative p-2 bg-gray-800 w-full text-white focus:outline focus:outline-teal-500 
+                    transition-all resize scrollbar-hide ' 
+                    {...register("input", {required: true, minLength: 1, maxLength:212})}
+                    onChange={e => setCount(e.target.value.length)}
+                    />
+                    <p className={`relative right-10 top-30 text-[11px] ${ count< 213 ? "text-teal-500" : "text-red-500"} "`}>{count}/212</p>
+                    <button className=" h-13 w-12 -ml-6 
+                        bg-gray-800 p-1 px-5 text-bold mtext-md flex items-center justify-center 
+                        text-teal-500 font-mono transition-all cursor-pointer 
+                        hover:text-black hover:bg-teal-500">
+                            <ArrowForwardIcon/>
+                    </button>
+                </form>
             </div>
-            {/* End of Message Box*/}
-
             </>
         );
     }
     return (
         <>
         <div className="absolute h-full w-full -ml-16 -mt-16 flex flex-col">
-            <div className = "pl-16 h-full w-full bg-gray-600">
+            <div className ="pl-16 pt-16 h-full w-full bg-gray-600 overflow-y-scroll
+             overflow-x-hidden !scrollbar-thin !scrollbar-thumb-teal-600"
+             >
+                {
+                    activeChat != null 
+                    ? 
+                        <div className="fixed w-full border-b shadow-md border-teal-700 text-sm
+                         p-2 font-mono text-white
+                        bg-gray-700 h-16 mb-2 md:bg-opacity-80 flex-col items-center justify-center ">
+
+                                <p className="text-teal-500 ">Chat with: </p>
+                                <p className=""> {activeChat.ID} </p>
+                        </div>
+                    :
+                    ""
+                }
+                <div className="pb-[68px]"/>
+                {
+                    messages?.map((message) => (
+                        <React.Fragment key={message.PDA.toBase58()}>
+                            <Message PDA={message.PDA} data={message.data}/>
+                        </React.Fragment>
+                    ))
+                }
+                <div id={"scroll-bottom"}>
+                </div>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-row pl-[88px] p-6 bg-gray-900 w-full mx-auto'>
-                <textarea className='relative p-2 bg-gray-800 w-full text-white focus:outline focus:outline-teal-500 
+                <textarea onSubmit={handleSubmit(onSubmit)}  id ="message-area" className='relative p-2 bg-gray-800 w-full text-white focus:outline focus:outline-teal-500 
                 transition-all resize scrollbar-hide ' 
                 {...register("input", {required: true, minLength: 1, maxLength:212})}
                 onChange={e => setCount(e.target.value.length)}
                 />
-                <p className={`relative mt-1 right-10 top-30 text-xs ${ count< 213 ? "text-teal-500" : "text-red-500"} "`}>{count}/212</p>
+                <p className={`relative right-10 top-30 text-[11px] ${ count< 213 ? "text-teal-500" : "text-red-500"} "`}>{count}/212</p>
                 <button className=" h-13 w-12 -ml-6 
                     bg-gray-800 p-1 px-5 text-bold mtext-md flex items-center justify-center 
                     text-teal-500 font-mono transition-all cursor-pointer 
