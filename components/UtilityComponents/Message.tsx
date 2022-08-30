@@ -22,8 +22,6 @@ interface MessageData {
 }
 
 
-
-
 const Message = ({PDA, data}:MessageData) => {
     const {publicKey} = useWallet();
     const [reloadMessageList, setReloadMessageList] = useRecoilState(messageListState);
@@ -66,7 +64,7 @@ const Message = ({PDA, data}:MessageData) => {
             <div className=" flex p-1 pr-7 justify-end">
                 <div className="message-sent group pr-1.5">
                     {data.message}
-                    <div className=" z-auto
+                    <div className=" z-10
                                 rounded-xl -mt-4 -ml-1
                                 text-red-500 cursor-pointer 
                                 scale-0 group-hover:scale-100

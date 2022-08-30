@@ -1,7 +1,6 @@
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { workspace } from "@project-serum/anchor";
+import { ArrowForwardIcon, RepeatIcon } from "@chakra-ui/icons";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
+import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -37,7 +36,12 @@ const ChatMessages = () => {
     const [messages, setMessages] = useState<MessageData[] | null>();
     const workspace = CreateWorkspace();
 
-    
+    const { 
+        register, 
+        handleSubmit, 
+        formState: { errors } 
+      } = useForm<Input>();
+
     const fetchChatMessages= async () =>{
         setLoading(true)
         if(activeChat != null){
@@ -53,21 +57,26 @@ const ChatMessages = () => {
         fetchChatMessages().then(() => {
             setLoading(false)
         });
-    }, [ activeChat, reloadMessageList]);
+    }, [activeChat, reloadMessageList]);
 
 
     useEffect(()=> {
         const element = document.getElementById("scroll-bottom")
         element?.scrollIntoView(false)
     }, [messages]);
-      
 
-    const { 
-        register, 
-        handleSubmit, 
-        formState: { errors } 
-      } = useForm<Input>();
+    
+    /*
+    const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+    
+    connection.onAccountChange(
+        activeChat?.chatPDA!,
+        () =>
+            setReloadMessageList(!reloadMessageList),
+            "confirmed"
+    );
 
+     */
     const onSubmit: SubmitHandler<Input> = async ({input}) => {
         if (activeChat == null) return
         const pendingTransction = notifyPending()
@@ -107,7 +116,7 @@ const ChatMessages = () => {
                             p-2 font-mono text-white
                             bg-gray-700 h-16 mb-2 bg-opacity-80 flex-col items-center justify-center ">
 
-                                    <p className="text-teal-500 ">Chat with: </p>
+                                    <p className="text-teal-500 font-mono">Chat with: </p>
                                     <p className=" "> {activeChat.ID} </p>
                             </div>
                         :
@@ -146,11 +155,24 @@ const ChatMessages = () => {
                     activeChat != null 
                     ? 
                         <div className="fixed w-full border-b shadow-md border-teal-700 text-sm
-                         p-2 font-mono text-white
-                        bg-gray-700 h-16 mb-2 md:bg-opacity-80 flex-col items-center justify-center ">
-
-                                <p className="text-teal-500 ">Chat with: </p>
-                                <p className=""> {activeChat.ID} </p>
+                         p-2 text-white flex z-20
+                        bg-gray-700 h-16 mb-2 md:bg-opacity-80 flex-col">
+                                <p className="text-teal-500 font-mono">Chat with: </p>
+                                <div className="flex flex-row justify-between">
+                                    <p className="font-mono w-24 sm:w-full truncate ..."> {activeChat.ID} </p>
+                                    <div className="text-teal-500 -mt-1 mr-20 cursor-pointer group"
+                                        onClick={() => setReloadMessageList(!reloadMessageList)}
+                                        >
+                                        <RepeatIcon className="hover:animate-spin" h={24} w={24}></RepeatIcon> 
+                                    
+                                        <span className="absolute -ml-11 -mt-7 h-8 p-2 rounded-md shadow-md
+                                            text-white bg-gray-900 
+                                            text-md z-auto
+                                            transition-all duration-100 scale-0 origin-bottom group-hover:scale-100 ">
+                                            Reload
+                                        </span>
+                                    </div>
+                                </div>
                         </div>
                     :
                     ""
