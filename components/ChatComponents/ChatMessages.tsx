@@ -64,19 +64,23 @@ const ChatMessages = () => {
         const element = document.getElementById("scroll-bottom")
         element?.scrollIntoView(false)
     }, [messages]);
-
     
-    /*
-    const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
     
-    connection.onAccountChange(
-        activeChat?.chatPDA!,
-        () =>
-            setReloadMessageList(!reloadMessageList),
-            "confirmed"
-    );
+    //solana web socket
+    useEffect(()=> {
+        if (activeChat) {
+            const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+            connection.onAccountChange(
+                activeChat.chatPDA,
+                (updatedAccountInfo, context) =>
+                setReloadMessageList(!reloadMessageList),
+                "confirmed"
+            );
+        }
+    }, [activeChat]);
 
-     */
+
+     
     const onSubmit: SubmitHandler<Input> = async ({input}) => {
         if (activeChat == null) return
         const pendingTransction = notifyPending()

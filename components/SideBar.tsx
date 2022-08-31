@@ -1,8 +1,8 @@
 import { EmailIcon,
-         MoonIcon,
          QuestionIcon,
+         RepeatClockIcon,
          Search2Icon,
-         SettingsIcon } from '@chakra-ui/icons';
+         SettingsIcon, } from '@chakra-ui/icons';
 import React from 'react'
 import Link from 'next/link';
 
@@ -27,7 +27,9 @@ const SideBar = () => {
                 </Link>
                 <SideBarIcon icon = {<QuestionIcon boxSize={icon_size}/>} text="Help"/>
                 <SideBarIcon icon = {<Search2Icon boxSize={icon_size}/>} text="Search"/>
-                <SideBarIcon icon = {<MoonIcon boxSize={icon_size}/>} text="Moon"/>
+                <Link href="/reclaim">
+                    <SideBarIcon icon = {<RepeatClockIcon boxSize={icon_size}/>} text="Reclaim"/>
+                </Link>
                 <hr  className ="self-center w-12 border-gray-500" />
                 <SideBarIcon icon = {<SettingsIcon boxSize={icon_size}/>} text="Settings"/>
             </div>

@@ -42,6 +42,7 @@ const ChatList = () => {
             setLoading(false)
         });
     }, [reloadChatList]);
+    
 
     if (loading){
         return (

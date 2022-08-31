@@ -1,7 +1,6 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import type { NextPage } from 'next'
 import Head from 'next/head';
-import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import ChatList from '../components/ChatComponents/ChatList';
 import ChatMessages from '../components/ChatComponents/ChatMessages';
@@ -9,7 +8,7 @@ import LoadingSpinner from '../components/UtilityComponents/LoadingSpinner';
 
 const Messages: NextPage = () => {
 
-  const { publicKey, connected } = useWallet();
+  const { publicKey } = useWallet();
 
   if (!publicKey){
     return(
