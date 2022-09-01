@@ -36,7 +36,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         () => [
             new PhantomWalletAdapter(),
             new SolflareWalletAdapter({ network }),
-            new TorusWalletAdapter(),
             new LedgerWalletAdapter(),
             new SolletWalletAdapter({ network }),
             new SolletExtensionWalletAdapter({ network }),

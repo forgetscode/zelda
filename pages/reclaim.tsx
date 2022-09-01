@@ -99,7 +99,7 @@ const Reclaim: NextPage = () => {
                             {"Data "}
                         </p>
                         <Typed
-                        className=' pl-1 flex py-6 text-2xl md:text-4xl text-bold font-manrope text-teal-500 transition-all '
+                        className=' pl-1.5 flex py-6 text-2xl md:text-4xl text-bold font-manrope text-teal-500 transition-all '
                         strings={[' has a cost.', ' is time.', '', '',' is $.' ]} typeSpeed={100} backSpeed={100} loop/>
                     </div>
                     <p className='w-3/5 mx-auto text-teal-500 italic text-xs md:text-sm md:text-md'>
