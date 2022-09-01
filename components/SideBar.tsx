@@ -1,5 +1,5 @@
 import { EmailIcon,
-         QuestionIcon,
+         QuestionOutlineIcon,
          RepeatClockIcon,
          Search2Icon,
          SettingsIcon, } from '@chakra-ui/icons';
@@ -25,7 +25,7 @@ const SideBar = () => {
                         <SideBarIcon icon = {<EmailIcon boxSize={icon_size}/>} text="Messages"/>
                     </a>
                 </Link>
-                <SideBarIcon icon = {<QuestionIcon boxSize={icon_size}/>} text="Help"/>
+                <SideBarIcon icon = {<QuestionOutlineIcon boxSize={icon_size}/>} text="Help"/>
                 <SideBarIcon icon = {<Search2Icon boxSize={icon_size}/>} text="Search"/>
                 <Link href="/reclaim">
                     <a>
