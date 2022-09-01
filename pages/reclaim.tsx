@@ -95,11 +95,11 @@ const Reclaim: NextPage = () => {
                     Reclaim.
                     </h1>
                     <div className='flex flex-row w-full items-center justify-center'>
-                        <p className='-ml-24 md:-ml-32 absolute flex py-6 text-2xl md:text-4xl text-bold text-white font-manrope'>
+                        <p className='flex py-6 text-2xl md:text-4xl text-bold text-white font-manrope'>
                             {"Data "}
                         </p>
                         <Typed
-                        className='ml-36 pl-1 w-48 flex py-6 text-2xl md:text-4xl text-bold font-manrope text-teal-500 transition-all '
+                        className=' pl-1 flex py-6 text-2xl md:text-4xl text-bold font-manrope text-teal-500 transition-all '
                         strings={[' has a cost.', ' is time.', '', '',' is $.' ]} typeSpeed={100} backSpeed={100} loop/>
                     </div>
                     <p className='w-3/5 mx-auto text-teal-500 italic text-xs md:text-sm md:text-md'>
