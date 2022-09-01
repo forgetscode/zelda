@@ -9,6 +9,7 @@ import { PublicKey } from "@solana/web3.js";
 import { useRecoilState } from "recoil";
 import { activeChatState, chatListState, openChatState } from "../../atoms/Atom";
 import { background } from "@chakra-ui/react";
+import { RepeatIcon } from "@chakra-ui/icons";
 
 interface ChatData {
     chatPDA:PublicKey,
@@ -77,6 +78,17 @@ const ChatList = () => {
         <div className={`bg-gray-800 lg:w-64 w-32 -mt-16 h-screen flex origin-left transition-all ${chatBarState ?"ml-0" : "lg:-ml-64 -ml-32"}`}> 
             <div className=" origin-top pt-16 flex flex-col w-full pr-1 space-y-6 overflow-y-scroll overflow-x-hidden !scrollbar-thin 
             !scrollbar-thumb-teal-600 transition-all duration-300 border-r border-gray-900">
+                <div className="text-teal-500 mt-6 bg-gray-800 flex mx-auto cursor-pointer group"
+                    onClick={() => setReloadChatList(!reloadChatList)}
+                    >
+                    <RepeatIcon className="hover:animate-spin" h={24} w={24}></RepeatIcon> 
+                    <span className="absolute -ml-5 -mt-7 h-8 p-2 rounded-md
+                            text-white bg-gray-900 
+                            text-sm z-auto
+                            transition-all duration-100 scale-0 origin-bottom group-hover:scale-100 ">
+                            Reload
+                    </span>
+                </div>
                 {   
                     (chats!.length > 0) ?
                     chats?.map((chat) =>(

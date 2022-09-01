@@ -2,7 +2,7 @@ import { CloseIcon, CopyIcon } from '@chakra-ui/icons';
 import { PublicKey } from '@solana/web3.js';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRecoilState } from 'recoil';
-import { chatListState, activeChatState} from '../../atoms/Atom';
+import { chatListState, activeChatState, messageListState} from '../../atoms/Atom';
 import { notifyFailure, notifyPending, notifySuccess } from './Notifications';
 import * as sms from '../../utility/smsTools';
 import { CreateWorkspace } from './CreateWorkspace';
@@ -25,6 +25,7 @@ const ChatItem:React.FC<ChatInfo> =({ID, chatPDA, data}: ChatInfo) => {
     
     const [reloadChatList, setReloadChatList] = useRecoilState(chatListState)
     const [activeChat, setActiveChat] = useRecoilState(activeChatState)
+    const [reloadMessageList, setReloadMessageList] = useRecoilState(messageListState);
     const workspace = CreateWorkspace();
 
     const chatData = {
@@ -44,6 +45,8 @@ const ChatItem:React.FC<ChatInfo> =({ID, chatPDA, data}: ChatInfo) => {
             const tx = await sms.closeChat(otherID, chatPDA, data, workspace)
             const confirmation = await workspace.connection.confirmTransaction(tx, 'processed');
             if(!confirmation.value.err){
+                setActiveChat(null)
+                setReloadMessageList(!reloadMessageList)
                 toast.dismiss(pendingTransction)
                 setReloadChatList(!reloadChatList)
                 notifySuccess("Chat Deleted")

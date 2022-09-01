@@ -13,6 +13,19 @@ interface ChatData {
   otherChatId:number,
   receiver:PublicKey
 }
+
+interface Data {
+  account: any,
+  pubkey: PublicKey,
+}
+
+interface Message {
+  bump: number,
+  initializer:PublicKey,
+  masterId: PublicKey,
+  message:string,
+  messageId:number,
+}
   
 type Workspace =  {
     wallet: WalletContextState;
@@ -31,6 +44,33 @@ type Workspace =  {
       return false
     }
     return key
+  }
+
+  export const checkMessage = async (programData:Data[], workspace:Workspace) => {
+    type MessageData = {
+      PDA: PublicKey, 
+      data: Message
+    }
+    let messages:MessageData[] = []
+    try{
+        for (let i = 0; i < programData.length; i++) { 
+            try{
+                const result = await workspace.program.account.message.fetch(programData[i].pubkey)
+                let obj = {
+                  PDA:programData[i].pubkey,
+                  data:result,
+                }
+                messages.push(obj)
+            }
+            catch{
+                continue
+            }
+        }
+     }
+    catch(err:any){
+        return err
+    }
+    return messages
   }
 
   export const GetPDAInitializer = async(initializer:PublicKey, chat_id:number, workspace:Workspace) => {
@@ -95,7 +135,7 @@ type Workspace =  {
   export const getIndexReceiver = async(account:PublicKey, workspace:Workspace) => {
     let index = 0;
     try{
-      for (let i = 1; i < 13; i++) { 
+      for (let i = 1; i < 7; i++) { 
         let cursor = await GetPDAReceiver(account, i, workspace);
         try{
           let data = await workspace.program.account.chat.fetch(cursor);
@@ -135,7 +175,7 @@ type Workspace =  {
   export const getReceiverChats = async(account:PublicKey, workspace:Workspace) => {
     let receiverChats = []
     try{
-      for (let i = 1; i < 13; i++) { 
+      for (let i = 1; i < 7; i++) { 
         let cursor = await GetPDAReceiver(account, i, workspace);
         try{
           const chatData = await workspace.program.account.chat.fetch(cursor);
@@ -310,13 +350,16 @@ type Workspace =  {
         return("Transaction cancelled.");
     }
     else if (err.toString().includes("Error processing Instruction 0: custom program error: 0x0")){
-      return("Maximum active chat accounts reached for either receiving(12) or initializing chats(6).")
+      return("Maximum active chat accounts reached for either receiving(6) or initializing chats(6).")
     }
     else if (err.toString().includes("cancelledWalletSignTransactionError")){
       return("Wallet connection not found, check that you are connected.")
     }
     else if (err.toString().includes("2003")){
       return("You can already talk to yourself.")
+    }
+    else if (err.toString().includes("3012")){
+      return("Account does not exist anymore")
     }
     else{   
         return("Transaction cancelled"+ err.toString());

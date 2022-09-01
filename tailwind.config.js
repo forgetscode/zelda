@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'manrope': 'Manrope',
+      },
       colors: {
         gray: {
           900: '#202225',

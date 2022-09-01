@@ -28,7 +28,9 @@ const SideBar = () => {
                 <SideBarIcon icon = {<QuestionIcon boxSize={icon_size}/>} text="Help"/>
                 <SideBarIcon icon = {<Search2Icon boxSize={icon_size}/>} text="Search"/>
                 <Link href="/reclaim">
-                    <SideBarIcon icon = {<RepeatClockIcon boxSize={icon_size}/>} text="Reclaim"/>
+                    <a>
+                        <SideBarIcon icon = {<RepeatClockIcon boxSize={icon_size}/>} text="Reclaim"/>
+                    </a>
                 </Link>
                 <hr  className ="self-center w-12 border-gray-500" />
                 <SideBarIcon icon = {<SettingsIcon boxSize={icon_size}/>} text="Settings"/>
