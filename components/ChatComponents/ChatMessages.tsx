@@ -124,9 +124,9 @@ const ChatMessages = () => {
                     {
                         activeChat !=  null
                         ? 
-                            <div className="border-b shadow-md border-teal-700 text-sm
+                            <div className=" text-sm
                             p-2 font-mono text-white
-                            bg-gray-700 h-16 mb-2 bg-opacity-80 flex-col items-center justify-center ">
+                            bg-gray-800 h-16 mb-2 bg-opacity-80 flex-col items-center justify-center ">
 
                                     <p className="text-teal-500 font-mono">Chat with: </p>
                                     <p className=" "> {activeChat.ID} </p>
@@ -166,12 +166,12 @@ const ChatMessages = () => {
                 {
                     activeChat != null 
                     ? 
-                        <div className="fixed w-full border-b shadow-md border-teal-700 text-sm
+                        <div className="fixed w-full text-sm
                          p-2 text-white flex z-20
-                        bg-gray-700 h-16 mb-2 md:bg-opacity-80 flex-col">
-                                <p className="text-teal-500 font-mono">Chat with: </p>
+                        bg-gray-800 h-16 mb-2 md:bg-opacity-50 flex-col">
+                                <p className="text-teal-500 ">Chat with: </p>
                                 <div className="flex flex-row justify-between">
-                                    <p className="font-mono w-24 sm:w-full truncate ..."> {activeChat.ID} </p>
+                                    <p className="w-24 pt-0.5 text-xs sm:w-full truncate ..."> {activeChat.ID} </p>
                                     <div className="text-teal-500 -mt-1 mr-20 cursor-pointer group"
                                         onClick={() => setReloadMessageList(!reloadMessageList)}
                                         >

@@ -1,5 +1,4 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { workspace } from '@project-serum/anchor';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js'
 import React from 'react'

@@ -3,9 +3,7 @@ import {
     HiCloud, 
     HiOutlineQuestionMarkCircle, 
     HiRefresh, 
-    HiSupport
 } from "react-icons/hi";
-import { ImCog } from "react-icons/im";
 import React from 'react'
 import Link from 'next/link';
 
