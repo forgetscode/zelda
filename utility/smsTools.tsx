@@ -112,84 +112,145 @@ type Workspace =  {
     return message;
   }
 
-  export const getIndexInitializer = async(account:PublicKey, workspace:Workspace) => {
-    let index = 0;
+  const resolveInitializerChatIndex= async(account:PublicKey, index:number, workspace:Workspace) => {
     try{
-      for (let i = 1; i < 7; i++) { 
-        let cursor = await GetPDAInitializer(account, i, workspace);
-        try{
-          let data = await workspace.program.account.chat.fetch(cursor);
-        }
-        catch{
-          index = i -1;
-          break
-        }
+      let cursor = await GetPDAInitializer(account, index, workspace);
+      let data = await workspace.program.account.chat.fetch(cursor);
+      return {
+        index:index,
+        response:true,
       }
     }
-    catch(err:any){
-      return(err)
+    catch(err){
+      return {
+        index:index,
+        response:false,
+      }
     }
-    return index
   }
 
-  export const getIndexReceiver = async(account:PublicKey, workspace:Workspace) => {
-    let index = 0;
+
+  // first index missing -1 if none return err
+  export const getIndexInitializer = async(account:PublicKey, workspace:Workspace) => {
+    type IndexData = {
+      index: number,
+      response: boolean
+    }
+    const data: Promise<IndexData>[] = [];
+
+    for (let i = 1; i < 7; i++) { 
+      data.push(resolveInitializerChatIndex(account, i, workspace))
+    }
+
+    const resolvedData = (await Promise.all(data)).sort((a, b) => a.index < b.index ? -1 : 1)
     try{
-      for (let i = 1; i < 7; i++) { 
-        let cursor = await GetPDAReceiver(account, i, workspace);
-        try{
-          let data = await workspace.program.account.chat.fetch(cursor);
-        }
-        catch{
-          index = i - 1;
-          break
-        }
+      const index = resolvedData?.find(element => element.response === false)?.index! -1
+      return index
+    }
+    catch{
+      return 0
+    }
+  }
+
+  const resolveReceiverChatIndex= async(account:PublicKey, index:number, workspace:Workspace) => {
+    try{
+      let cursor = await GetPDAReceiver(account, index, workspace);
+      let data = await workspace.program.account.chat.fetch(cursor);
+      return {
+        index:index,
+        response:true,
       }
     }
-    catch(err:any){
-      return(err)
+    catch(err){
+      return {
+        index:index,
+        response:false,
+      }
     }
-    return index
+  }
+
+
+  // first index missing -1 if none return err
+  export const getIndexReceiver= async(account:PublicKey, workspace:Workspace) => {
+    type IndexData = {
+      index: number,
+      response: boolean
+    }
+    const data: Promise<IndexData>[] = [];
+
+    for (let i = 1; i < 7; i++) { 
+      data.push(resolveReceiverChatIndex(account, i, workspace))
+    }
+
+    const resolvedData = (await Promise.all(data)).sort((a, b) => a.index < b.index ? -1 : 1)
+    try{
+      const index = resolvedData?.find(element => element.response === false)?.index! -1
+      return index
+    }
+    catch{
+      return 0
+    }
+  }
+
+  const resolveChatsInitializer = async(account:PublicKey, index:number,  workspace:Workspace) => {
+    try{
+      let chatPDA = await GetPDAInitializer(account, index, workspace);
+      const chatData = await workspace.program.account.chat.fetch(chatPDA);
+      return{
+        chatPDA:chatPDA,
+        data:chatData,
+      }
+    }
+    catch(err){
+      return index
+    }
+  }
+  const resolveChatsReceiver = async(account:PublicKey, index:number,  workspace:Workspace) => {
+    try{
+      let chatPDA = await GetPDAReceiver(account, index, workspace);
+      const chatData = await workspace.program.account.chat.fetch(chatPDA);
+      return{
+        chatPDA:chatPDA,
+        data:chatData,
+      }
+    }
+    catch(err){
+      return index
+    }
   }
 
   export const getInitializerChats = async(account:PublicKey, workspace:Workspace) => {
-    let InitializerChats = []
-    try{
-      for (let i = 1; i < 7; i++) { 
-        let cursor = await GetPDAInitializer(account, i, workspace);
-        try{
-          const chatData = await workspace.program.account.chat.fetch(cursor);
-          InitializerChats.push({chatPDA: cursor, data:chatData});
-        }
-        catch{
-          continue
-        }
-      }
+    type PDAChatData = {
+      chatPDA: PublicKey,
+      data: ChatData,
     }
-    catch(err:any){
-      return(err)
+
+    const data: Promise<PDAChatData| number >[] = [];
+
+
+    for (let i = 1; i < 7; i++) { 
+      data.push(resolveChatsInitializer(account, i, workspace));
     }
-    return InitializerChats
+    const resolvedData = (await Promise.all(data)).filter((x): x is PDAChatData => typeof x !== "number")
+
+    return resolvedData
   }
 
   export const getReceiverChats = async(account:PublicKey, workspace:Workspace) => {
-    let receiverChats = []
-    try{
-      for (let i = 1; i < 7; i++) { 
-        let cursor = await GetPDAReceiver(account, i, workspace);
-        try{
-          const chatData = await workspace.program.account.chat.fetch(cursor);
-          receiverChats.push({chatPDA: cursor, data:chatData});
-        }
-        catch{
-          continue
-        }
-      }
+    type PDAChatData = {
+      chatPDA: PublicKey,
+      data: ChatData,
     }
-    catch(err:any){
-      return(err)
+
+    const data: Promise<PDAChatData| number >[] = [];
+
+
+    for (let i = 1; i < 7; i++) { 
+      data.push(resolveChatsReceiver(account, i, workspace));
     }
-    return receiverChats
+    const resolvedData = (await Promise.all(data)).filter((x): x is PDAChatData => typeof x !== "number")
+
+    return resolvedData
   }
 
   export const getAccountChats = async(account:PublicKey, workspace:Workspace) => {
@@ -199,7 +260,7 @@ type Workspace =  {
       return initializeChats.concat(ReceiverChats);
     }
     catch(err:any){
-      return(424)
+      return(err)
     }
   }
 
