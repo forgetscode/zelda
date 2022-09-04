@@ -27,7 +27,6 @@ const SideBar = () => {
                         <SideBarIcon icon = {<HiMail className='h-7 w-7' />} text="Messages"/>
                     </a>
                 </Link>
-                <SideBarIcon icon = {<HiOutlineQuestionMarkCircle className='h-7 w-7'/>} text="Help"/>
                 <Link href="/airdrop">
                     <a>
                         <SideBarIcon icon = {<HiCloud className="h-7 w-7"/>} text="Airdrop"/>
@@ -40,7 +39,7 @@ const SideBar = () => {
                     </a>
                 </Link>
                 <hr  className ="self-center w-12 border-gray-500" />
-                <SideBarIcon icon = {<ImCog className="h-6 w-6"/>} text="Settings"/>
+                <SideBarIcon icon = {<HiOutlineQuestionMarkCircle className='h-7 w-7'/>} text="Help"/>
             </div>
 
             <div className ="fixed top-0 h-16 w-screen 

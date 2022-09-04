@@ -1,4 +1,4 @@
-import { useAnchorWallet, useWallet } from '@solana/wallet-adapter-react';
+import { useAnchorWallet, useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey, Transaction } from '@solana/web3.js';
 import type { NextPage } from 'next'
 import Head from 'next/head';
@@ -22,11 +22,26 @@ interface MessageData {
     }
   }
 
+interface ChatData {
+    chatPDA:PublicKey,
+    data:{
+        bump:number,
+        chatId:number,
+        initializer:PublicKey,
+        masterId:PublicKey,
+        messageCount:number,
+        otherChatId:number,
+        receiver:PublicKey
+    }
+}
+
+
 const Reclaim: NextPage = () => {
 
     const [loading, setLoading ] = useState(false)
     const [data, setData] = useState<any>()
-    const { publicKey, wallet} = useWallet();
+    const { publicKey, wallet, sendTransaction} = useWallet();
+    const { connection } = useConnection();
     const workspace = CreateWorkspace();
 
     const fetchData = async () =>{
@@ -35,9 +50,34 @@ const Reclaim: NextPage = () => {
             const data = await workspace.connection.getProgramAccounts(
                 workspace.programID
             )
+            
             const messages:MessageData[] = await sms.checkMessage(data, workspace)
-            const results = messages.filter(each => each.data.initializer.toBase58() == publicKey?.toBase58())
-            setData(results)
+            const goodMessages:MessageData[] =[]
+
+            const filterMessages = messages.filter(each => each.data.initializer.toBase58() == publicKey?.toBase58())
+            const AccountChats = await sms.getAccountChats(publicKey!, workspace)
+
+    
+            for(let i=0;i<AccountChats.length;i++){
+                const messagedata= await sms.getMessagesByChat(AccountChats[i].chatPDA, workspace)
+                for(let i=0;i<messagedata.length;i++){
+                    goodMessages.push(
+                            {
+                                PDA:messagedata[i].PDA, 
+                                data:messagedata[i].data,
+                            }
+                        )
+                }
+            }
+            const filterGoodMessages = goodMessages.filter(each => each.data.initializer.toBase58() == publicKey?.toBase58())
+            const badMessages = filterMessages.filter(
+                a =>
+                { 
+                    return !filterGoodMessages.some(b => a.PDA.toBase58() === b.PDA.toBase58())
+                }
+            )
+
+            setData(badMessages)
             setLoading(false)
         }
         else{
@@ -49,6 +89,8 @@ const Reclaim: NextPage = () => {
         const pendingTransction = notifyPending()
         try{
             if (data.length !=0) {
+                const transaction = new Transaction()
+
                 for(let i=0;i<data.length;i++){
                     const tx = await workspace.program.methods.closeMessage()
                     .accounts(
@@ -57,16 +99,21 @@ const Reclaim: NextPage = () => {
                         initializer: data[i].data.initializer,
                         systemProgram: anchor.web3.SystemProgram.programId,
                     },
-                    ).rpc();
-                    const confirmation = await workspace.connection.confirmTransaction(tx, 'processed');
-                    if(!confirmation.value.err){
-                        toast.dismiss(pendingTransction)
-                        notifySuccess("A messages was succesfully deleted")
-                    }
-                    else{
-                        toast.dismiss(pendingTransction)
-                        notifyFailure("Transaction Error: "+confirmation.value.err.toString());
-                    }
+                    ).transaction();
+                    transaction.add(tx)
+                }
+
+                const signature = await sendTransaction(transaction, connection);
+                const confirmation = await workspace.connection.confirmTransaction(signature, 'processed');
+
+                if(!confirmation.value.err){
+                    toast.dismiss(pendingTransction)
+                    notifySuccess("messages deleted")
+                    setData(null)
+                }
+                else{
+                    toast.dismiss(pendingTransction)
+                    notifyFailure("Transaction Error: "+confirmation.value.err.toString());
                 }
             }
             else{
@@ -81,7 +128,6 @@ const Reclaim: NextPage = () => {
             notifyFailure("Error: " + errorType);
         }
     }
-
 
 
     return (

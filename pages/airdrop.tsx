@@ -11,7 +11,6 @@ import * as sms from '../utility/smsTools';
 
 const Airdrop: NextPage = () => {
 
-    const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
     const [loading, setLoading ] = useState(false)
     const workspace = CreateWorkspace();
@@ -56,11 +55,11 @@ const Airdrop: NextPage = () => {
         </Head>  
         <Toaster/>
         
-        <div className='bg-gradient-to-b from-[#f5f9ff] to-[#2474d0]/80 flex h-full w-full'>
+        <div className='bg-gradient-to-b from-slate-800 to-teal-600/80 flex h-full w-full'>
             <div className='flex flex-col mx-auto mt-16'>
         
                 <div className='space-y-8 text-center pt-16 ml-16'>
-                    <h1 className='transition-all w-full text-6xl md:text-8xl text-[#1B5BDB] font-bold text-center'>
+                    <h1 className='transition-all w-full text-6xl md:text-8xl text-teal-400 font-bold text-center'>
                     AirDrop.
                     </h1>
                     <div>
@@ -72,9 +71,9 @@ const Airdrop: NextPage = () => {
                     <p className='w-3/5 mx-auto text-white italic text-xs md:text-sm md:text-md'>
                         This tool is here to send you some Sol. This is devnet Sol and not real Sol.
                     </p>
-                    <button className='mx-auto w-20 text-center text-white bg-[#1044ae] flex p-4 rounded-lg hover:bg-[#2c54a3] items-center justify-center transition-all'
+                    <button className='mx-auto w-20 text-center text-white bg-black flex p-4 rounded-lg hover:bg-gray-900 items-center justify-center transition-all'
                         onClick={() => airdrop()}>
-                            { !loading ? "Airdrop" :<LoadingSpinner sizeOf ={"smaller"}></LoadingSpinner>}
+                            { !loading ? "Airdrop" :<LoadingSpinner sizeOf ={"small"}></LoadingSpinner>}
                     </button>
                 </div>
             </div>
