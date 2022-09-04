@@ -131,7 +131,7 @@ const AddChatItem = () => {
                     <AddIcon w={22} h={16} className=" absolute"/>
             <span className="absolute -mt-16 h-8 text-center pt-1 w-24 rounded-md shadow-md
                               text-white bg-gray-900  font-bold 
-                              transition-all duration-100 scale-0 origin-left group-hover:scale-100 ">
+                              transition-all duration-100 scale-0 origin-bottom group-hover:scale-100 ">
                               Add Chat
               </span>
         </div>
