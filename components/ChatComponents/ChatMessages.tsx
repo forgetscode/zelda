@@ -51,7 +51,6 @@ const ChatMessages = () => {
                 setMessages(data)
             }
             catch{
-                notifyFailure("This chat no longer exists.")
                 setActiveChat(null)
                 setReloadMessageList(!reloadMessageList)
                 setReloadChatList(!reloadChatList)

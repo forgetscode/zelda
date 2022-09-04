@@ -1,7 +1,7 @@
 import { PublicKey } from '@solana/web3.js'
 import * as anchor from "@project-serum/anchor";
-import { useWallet, WalletContextState } from "@solana/wallet-adapter-react";
-import { clusterApiUrl, Connection } from "@solana/web3.js";
+import { WalletContextState } from "@solana/wallet-adapter-react";
+import { Connection } from "@solana/web3.js";
 import { Sms2 } from '../target/types/sms2';
 
 interface ChatData {
@@ -421,6 +421,9 @@ type Workspace =  {
     }
     else if (err.toString().includes("3012")){
       return("Account does not exist anymore")
+    }
+    else if (err.toString().includes("429")){
+      return("Too many requests!")
     }
     else{   
         return("Transaction cancelled"+ err.toString());

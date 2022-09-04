@@ -1,8 +1,11 @@
-import { EmailIcon,
-         QuestionOutlineIcon,
-         RepeatClockIcon,
-         Search2Icon,
-         SettingsIcon, } from '@chakra-ui/icons';
+import {
+    HiMail,
+    HiCloud, 
+    HiOutlineQuestionMarkCircle, 
+    HiRefresh, 
+    HiSupport
+} from "react-icons/hi";
+import { ImCog } from "react-icons/im";
 import React from 'react'
 import Link from 'next/link';
 
@@ -11,7 +14,6 @@ import { useRecoilState } from 'recoil';
 import { openChatState } from '../atoms/Atom';
 
 const SideBar = () => {
-    const icon_size = 22;
     const [ chatBarState, setChatBarState] = useRecoilState(openChatState);
     return (
         <>
@@ -22,18 +24,23 @@ const SideBar = () => {
 
                 <Link href="/messages">
                     <a onClick={() => setChatBarState(true)}>
-                        <SideBarIcon icon = {<EmailIcon boxSize={icon_size}/>} text="Messages"/>
+                        <SideBarIcon icon = {<HiMail className='h-7 w-7' />} text="Messages"/>
                     </a>
                 </Link>
-                <SideBarIcon icon = {<QuestionOutlineIcon boxSize={icon_size}/>} text="Help"/>
-                <SideBarIcon icon = {<Search2Icon boxSize={icon_size}/>} text="Search"/>
+                <SideBarIcon icon = {<HiOutlineQuestionMarkCircle className='h-7 w-7'/>} text="Help"/>
+                <Link href="/airdrop">
+                    <a>
+                        <SideBarIcon icon = {<HiCloud className="h-7 w-7"/>} text="Airdrop"/>
+                    </a>
+                </Link>
+                
                 <Link href="/reclaim">
                     <a>
-                        <SideBarIcon icon = {<RepeatClockIcon boxSize={icon_size}/>} text="Reclaim"/>
+                        <SideBarIcon icon = {<HiRefresh className="h-7 w-7"/>} text="Reclaim"/>
                     </a>
                 </Link>
                 <hr  className ="self-center w-12 border-gray-500" />
-                <SideBarIcon icon = {<SettingsIcon boxSize={icon_size}/>} text="Settings"/>
+                <SideBarIcon icon = {<ImCog className="h-6 w-6"/>} text="Settings"/>
             </div>
 
             <div className ="fixed top-0 h-16 w-screen 

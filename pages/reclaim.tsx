@@ -10,7 +10,6 @@ import LoadingSpinner from '../components/UtilityComponents/LoadingSpinner';
 import { notifyFailure, notifyPending, notifySuccess } from '../components/UtilityComponents/Notifications';
 import * as sms from '../utility/smsTools';
 import * as anchor from "@project-serum/anchor";
-import { QuestionIcon } from '@chakra-ui/icons';
 
 interface MessageData {
     PDA:PublicKey,
@@ -31,14 +30,19 @@ const Reclaim: NextPage = () => {
     const workspace = CreateWorkspace();
 
     const fetchData = async () =>{
-        setLoading(true)
-        const data = await workspace.connection.getProgramAccounts(
-            workspace.programID
-        )
-        const messages:MessageData[] = await sms.checkMessage(data, workspace)
-        const results = messages.filter(each => each.data.initializer.toBase58() == publicKey?.toBase58())
-        setData(results)
-        setLoading(false)
+        if (publicKey){
+            setLoading(true)
+            const data = await workspace.connection.getProgramAccounts(
+                workspace.programID
+            )
+            const messages:MessageData[] = await sms.checkMessage(data, workspace)
+            const results = messages.filter(each => each.data.initializer.toBase58() == publicKey?.toBase58())
+            setData(results)
+            setLoading(false)
+        }
+        else{
+            notifyFailure("No wallet connected")
+        }
     }
 
     const reclaim = async () => {
