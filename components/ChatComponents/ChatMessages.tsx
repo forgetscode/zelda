@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useRecoilState } from "recoil";
-import { activeChatState, messageListState } from "../../atoms/Atom";
+import { activeChatState, chatListState, messageListState } from "../../atoms/Atom";
 import * as sms from '../../utility/smsTools';
 import { CreateWorkspace } from "../UtilityComponents/CreateWorkspace";
 import LoadingSpinner from "../UtilityComponents/LoadingSpinner";
@@ -31,8 +31,9 @@ const ChatMessages = () => {
     const [loading, setLoading ] = useState(false);
     const [count, setCount] = useState(0);
     const {publicKey} = useWallet();
-    const [activeChat] = useRecoilState(activeChatState)
+    const [activeChat, setActiveChat] = useRecoilState(activeChatState)
     const [reloadMessageList, setReloadMessageList] = useRecoilState(messageListState);
+    const [ reloadChatList, setReloadChatList ] = useRecoilState(chatListState);
     const [messages, setMessages] = useState<MessageData[] | null>();
     const workspace = CreateWorkspace();
 
@@ -45,8 +46,16 @@ const ChatMessages = () => {
     const fetchChatMessages= async () =>{
         setLoading(true)
         if(activeChat != null){
-            const data= await sms.getMessagesByChat(activeChat?.chatPDA!, workspace)
-            setMessages(data)
+            try{
+                const data= await sms.getMessagesByChat(activeChat?.chatPDA!, workspace)
+                setMessages(data)
+            }
+            catch{
+                notifyFailure("This chat no longer exists.")
+                setActiveChat(null)
+                setReloadMessageList(!reloadMessageList)
+                setReloadChatList(!reloadChatList)
+            }
         }
         else{
             return

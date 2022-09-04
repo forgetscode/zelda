@@ -7,8 +7,7 @@ import { CreateWorkspace } from "../UtilityComponents/CreateWorkspace";
 import * as sms from '../../utility/smsTools';
 import { PublicKey } from "@solana/web3.js";
 import { useRecoilState } from "recoil";
-import { activeChatState, chatListState, openChatState } from "../../atoms/Atom";
-import { background } from "@chakra-ui/react";
+import {  chatListState, openChatState } from "../../atoms/Atom";
 import { RepeatIcon } from "@chakra-ui/icons";
 
 interface ChatData {

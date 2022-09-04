@@ -7,7 +7,7 @@ import { CreateWorkspace } from './CreateWorkspace';
 import { chatListState } from '../../atoms/Atom';
 import { useRecoilState } from 'recoil';
 import { notifyFailure, notifyPending, notifySuccess } from './Notifications';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 interface Input {
     input:string
@@ -38,8 +38,8 @@ const AddChatItem = () => {
             const confirmation = await workspace.connection.confirmTransaction(tx, 'processed');
             if(!confirmation.value.err){
                 toast.dismiss(pendingTransction)
-                notifySuccess("Chat Created")
                 setReloadChatList(!reloadChatList)
+                notifySuccess("Chat Created")
             }
             else{
                 toast.dismiss(pendingTransction)
@@ -56,7 +56,6 @@ const AddChatItem = () => {
     if (formState) {
         return (
             <>
-            <Toaster/>
             <div className="group self-center text-teal-500 p-6 bg-gray-900 rounded-full border-teal-500 border 
             border-opacity-50 z-1 scale-75 flex items-center justify-center hover:bg-teal-500 hover:text-white hober:border-white transition-all cursor-pointer"
             onClick={() => setFormState(true)}>
@@ -124,7 +123,6 @@ const AddChatItem = () => {
 
     return (
         <>
-        <Toaster/>
         <div className="group self-center text-teal-500 p-6 bg-gray-900 rounded-full border-teal-500 border 
         border-opacity-50 z-1 scale-75 flex items-center justify-center hover:bg-teal-500 hover:text-white hober:border-white transition-all cursor-pointer"
         onClick={() => setFormState(true)}>

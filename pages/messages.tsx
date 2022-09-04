@@ -34,7 +34,6 @@ const Messages: NextPage = () => {
       <div className="absolute z-30">
         <ChatList/>
       </div>
-
       <div className='w-full h-full z-10'>
           <ChatMessages/>
       </div>

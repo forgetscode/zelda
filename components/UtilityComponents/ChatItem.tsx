@@ -1,6 +1,6 @@
 import { CloseIcon, CopyIcon } from '@chakra-ui/icons';
 import { PublicKey } from '@solana/web3.js';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { useRecoilState } from 'recoil';
 import { chatListState, activeChatState, messageListState} from '../../atoms/Atom';
 import { notifyFailure, notifyPending, notifySuccess } from './Notifications';
@@ -45,9 +45,9 @@ const ChatItem:React.FC<ChatInfo> =({ID, chatPDA, data}: ChatInfo) => {
             const tx = await sms.closeChat(otherID, chatPDA, data, workspace)
             const confirmation = await workspace.connection.confirmTransaction(tx, 'processed');
             if(!confirmation.value.err){
+                toast.dismiss(pendingTransction)
                 setActiveChat(null)
                 setReloadMessageList(!reloadMessageList)
-                toast.dismiss(pendingTransction)
                 setReloadChatList(!reloadChatList)
                 notifySuccess("Chat Deleted")
             }
@@ -65,7 +65,6 @@ const ChatItem:React.FC<ChatInfo> =({ID, chatPDA, data}: ChatInfo) => {
 
     return (
         <>
-        <Toaster/>
         <div className={`flex flex-row self-center items-center w-5/6 p-2 mt-4 h-12 text-center space-x-1
         rounded-xl   hover:bg-teal-600 transition-all hover:text-white justify-between
         ${activeChat?.chatPDA == chatData.chatPDA ? "bg-teal-600 text-white" : "bg-gray-900 text-teal-500 "}`}>
