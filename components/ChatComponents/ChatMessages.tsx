@@ -62,9 +62,15 @@ const ChatMessages = () => {
     }
 
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         fetchChatMessages().then(() => {
             setLoading(false)
+            signal: signal
         });
+        return () => {
+            controller.abort();
+        };
     }, [activeChat, reloadMessageList]);
 
 
@@ -76,6 +82,7 @@ const ChatMessages = () => {
     
     //solana web socket
     useEffect(()=> {
+        let isApiSubscribed = true;
         if (activeChat) {
             const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
             connection.onAccountChange(
@@ -84,6 +91,9 @@ const ChatMessages = () => {
                 setReloadMessageList(!reloadMessageList),
                 "confirmed"
             );
+        }
+        return () => {
+            isApiSubscribed = false;
         }
     }, [activeChat]);
 

@@ -37,10 +37,16 @@ const ChatList = () => {
     }
 
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
         setLoading(true)
         fetchAccountChats().then(() => {
             setLoading(false)
+            signal: signal
         });
+        return () => {
+            controller.abort();
+        };
     }, [reloadChatList]);
     
 
