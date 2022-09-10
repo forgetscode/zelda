@@ -9,6 +9,7 @@ import { PublicKey } from "@solana/web3.js";
 import { useRecoilState } from "recoil";
 import {  chatListState, openChatState } from "../../atoms/Atom";
 import { RepeatIcon } from "@chakra-ui/icons";
+import { checkCookie, compareCookie, getCookie } from "../../utility/cookies";
 
 interface ChatData {
     chatPDA:PublicKey,
@@ -23,18 +24,26 @@ interface ChatData {
     }
 }
 
+interface ChatDataNotified extends ChatData {
+    newStatus: boolean
+}
+
 const ChatList = () => {
     const [ loading, setLoading ] = useState(true);
-    const [chats, setChats] = useState<ChatData[]>();
+    const [chats, setChats] = useState<ChatDataNotified[]>();
     const { publicKey, connected } = useWallet();
     const [ chatBarState, setChatBarState] = useRecoilState(openChatState);
     const [ reloadChatList, setReloadChatList ] = useRecoilState(chatListState);
     const workspace = CreateWorkspace();
 
+
     const fetchAccountChats = async () =>{
         const AccountChats = await sms.getAccountChats(publicKey!, workspace)
-        setChats(AccountChats)
+        checkCookie(AccountChats)
+        let result = compareCookie(getCookie("chats"), AccountChats)
+        setChats(result)
     }
+
 
     useEffect(() => {
         const controller = new AbortController();
@@ -107,6 +116,7 @@ const ChatList = () => {
                             } 
                             chatPDA = {chat.chatPDA}
                             data = {chat.data}
+                            newStatus = {chat.newStatus}
                         >
                         </ChatItem>
                     )) : <div className="mt-4 font-mono text-sm md:text-md text-center mx-auto text-teal-500">No chats found</div>

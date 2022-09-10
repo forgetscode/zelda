@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useRecoilState } from "recoil";
 import { activeChatState, chatListState, messageListState } from "../../atoms/Atom";
+import { updateMessageCookie } from "../../utility/cookies";
 import * as sms from '../../utility/smsTools';
 import { CreateWorkspace } from "../UtilityComponents/CreateWorkspace";
 import LoadingSpinner from "../UtilityComponents/LoadingSpinner";
@@ -33,7 +34,7 @@ const ChatMessages = () => {
     const {publicKey} = useWallet();
     const [activeChat, setActiveChat] = useRecoilState(activeChatState)
     const [reloadMessageList, setReloadMessageList] = useRecoilState(messageListState);
-    const [ reloadChatList, setReloadChatList ] = useRecoilState(chatListState);
+    const [reloadChatList, setReloadChatList] = useRecoilState(chatListState);
     const [messages, setMessages] = useState<MessageData[] | null>();
     const workspace = CreateWorkspace();
 
@@ -111,6 +112,7 @@ const ChatMessages = () => {
                 const textarea =(document.getElementById('message-area') as HTMLInputElement)
                 textarea.value = ''
                 setCount(0)
+                updateMessageCookie(activeChat?.chatPDA!, activeChat?.data.messageCount + 1) 
                 setReloadMessageList(!reloadMessageList)
             }
             else{
