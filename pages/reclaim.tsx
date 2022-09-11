@@ -46,6 +46,7 @@ const Reclaim: NextPage = () => {
 
     const fetchData = async () =>{
         if (publicKey){
+            try{
             setLoading(true)
             const data = await workspace.connection.getProgramAccounts(
                 workspace.programID
@@ -79,11 +80,17 @@ const Reclaim: NextPage = () => {
 
             setData(badMessages)
             setLoading(false)
+            }
+            catch{
+                notifyFailure("Blockchain cannot be reached")
+            }
         }
         else{
             notifyFailure("No wallet connected")
-        }
-    }
+        } 
+
+    }               
+
 
     const reclaim = async () => {
         const pendingTransction = notifyPending()

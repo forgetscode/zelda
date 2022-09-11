@@ -51,7 +51,7 @@ export function checkCookie(data:ChatData[]) {
     }
 }
 
-function appendCookie(entry:ChatDataNotified){
+function appendCookie(entry:ChatData){
     let chats = getCookie("chats");
     chats.push(
         {
@@ -112,7 +112,7 @@ export function compareCookie(data:ChatData[], dataChats:ChatData[]) {
                 {
                     chatPDA:dataChats![i].chatPDA,
                     data:dataChats![i].data,
-                    newStatus:false
+
                 }
             )
         }
@@ -134,13 +134,24 @@ export function compareCookie(data:ChatData[], dataChats:ChatData[]) {
             )
         }
         else {
-            chatDataNotified.push(
-                {
-                    chatPDA:dataChats![i].chatPDA,
-                    data:dataChats![i].data,
-                    newStatus:false
-                }
-            )
+            if (inCookie) {
+                chatDataNotified.push(
+                    {
+                        chatPDA:dataChats![i].chatPDA,
+                        data:dataChats![i].data,
+                        newStatus:false
+                    }
+                )
+            }
+            else{
+                chatDataNotified.push(
+                    {
+                        chatPDA:dataChats![i].chatPDA,
+                        data:dataChats![i].data,
+                        newStatus:true
+                    }
+                )
+            }
         }
         
     }
