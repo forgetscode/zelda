@@ -37,8 +37,8 @@ const SideBar = () => {
                     </a>
                 </Link>
                 <hr  className ="self-center w-12 border-gray-500" />
-                <Link href="https://docs.google.com/document/d/1WbgqriD-RcG_bXlMQEkZvb4yHd9qv6i2G0nxD-rk_qc/edit?usp=sharing" passHref>
-                    <a target="_blank" rel="noopener noreferrer">
+                <Link href="/help">
+                    <a>
                         <SideBarIcon icon = {<HiOutlineQuestionMarkCircle className='h-7 w-7'/>} text="Help"/>
                     </a>
                 </Link>

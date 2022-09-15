@@ -13,6 +13,7 @@ const ParticleBackground = () => {
       const particlesLoaded = (container:any) => {
       };
       return (
+        <>
         <Particles
           id="tsparticles"
           init={particlesInit}
@@ -93,6 +94,7 @@ const ParticleBackground = () => {
             detectRetina: true,
           }}
         />
+        </>
       );
     };
 

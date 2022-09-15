@@ -2,6 +2,7 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import type { NextPage } from 'next'
 import Head from 'next/head';
 import Image from 'next/image'
+import { getPlaiceholder } from 'plaiceholder';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { CreateWorkspace } from '../components/UtilityComponents/CreateWorkspace';
@@ -9,7 +10,7 @@ import LoadingSpinner from '../components/UtilityComponents/LoadingSpinner';
 import { notifyFailure, notifyPending, notifySuccess } from '../components/UtilityComponents/Notifications';
 import * as sms from '../utility/smsTools';
 
-const Airdrop: NextPage = () => {
+const Airdrop: NextPage = ()  => {
 
     const { publicKey, sendTransaction } = useWallet();
     const [loading, setLoading ] = useState(false)
@@ -65,6 +66,8 @@ const Airdrop: NextPage = () => {
                     <div>
                         <Image 
                         src="/clouds2.png" 
+                        placeholder="blur"
+                        blurDataURL="/clouds2.png" 
                         width={312} height={312} 
                         />
                     </div>
