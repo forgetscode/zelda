@@ -3,7 +3,7 @@ import Head from "next/head"
 import Image from 'next/image'
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { HiChevronDown } from "react-icons/hi";
+import { HiChevronDown, HiTerminal } from "react-icons/hi";
 import PageScroll from "../components/UtilityComponents/PageScroll";
 
 const Help: NextPage = () => {
@@ -40,9 +40,13 @@ const Help: NextPage = () => {
 
                 <div className=" pt-16">    
 
-                    <div className="h-screen flex flex-col space-y-8 md:space-y-16 items-center mr-2"> 
-                        <p className="text-4xl md:text-6xl font-semibold text-transparent p-1 md:p-3 bg-clip-text bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 animate-text" id={"Legend"}> Legend</p>
-                        <div className="flex rounded-md bg-gradient-to-r from-teal-600 via-cyan-300 to-sky-600 pt-1 px-1 pb-1">
+                    <div className="h-screen flex flex-col space-y-8 items-center mr-2"> 
+                        <div className="flex flex-row">
+                            
+                            <p className="text-6xl font-semibold text-transparent p-3 bg-clip-text bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 animate-text" id={"Legend"}> Legend</p>
+                            <HiTerminal className=" mt-auto  h-20 w-20 text-white"></HiTerminal>
+                        </div>
+                        <div className="flex rounded-md bg-gradient-to-r from-teal-600 via-cyan-300 to-sky-600 pt-1 px-1 pb-1 shadow-outer">
                             <div className="w-full h-full">
                                 <div className="w-[350px] h-[420px] transition-all bg-black flex items-center justify-center">
                                     <span className="relative flex flex-col space-y-3 text-white text-lg font-medium">
