@@ -17,7 +17,7 @@ function PageScroll({image, w, h, id, text, header}:pageProps) {
         <div className="space-y-8">
             <p className="text-xl md:text-4xl font-extrabold text-white mb-16"> {header}</p>
             <div className="flex flex-row space-x-4 md:space-x-16 items-center">
-                <div className="flex border-gradient">
+                <div className="flex border-gradient-inverse">
                     <span className="h-full w-full">
                         <Image 
                         src= {image}
@@ -29,7 +29,7 @@ function PageScroll({image, w, h, id, text, header}:pageProps) {
                     </span>
                 </div>
                 <div className="space-y-3 pr-4 flex max-w-[400px]">
-                    <p className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-400 to-sky-500 text-xs md:text-sm lg:text-lg mx-auto text-center">
+                    <p className="text-transparent bg-clip-text border-gradient-variant2 text-xs md:text-sm lg:text-lg mx-auto text-center">
                         {text}
                     </p>
                 </div>

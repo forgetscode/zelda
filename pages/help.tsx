@@ -41,20 +41,20 @@ const Help: NextPage = () => {
                 <div className=" pt-16">    
 
                     <div className="h-screen flex flex-col space-y-8 md:space-y-16 items-center mr-2"> 
-                        <p className="text-4xl md:text-6xl font-semibold text-transparent p-1 md:p-3 bg-clip-text bg-gradient-to-r from-teal-500 via-cyan-300 to-sky-300 animate-text" id={"Legend"}> Legend</p>
+                        <p className="text-4xl md:text-6xl font-semibold text-transparent p-1 md:p-3 bg-clip-text bg-gradient-to-r from-emerald-600 via-blue-600 to-purple-600 animate-text" id={"Legend"}> Legend</p>
                         <div className="flex rounded-md bg-gradient-to-r from-teal-600 via-cyan-300 to-sky-600 pt-1 px-1 pb-1">
                             <div className="w-full h-full">
                                 <div className="w-[350px] h-[420px] transition-all bg-black flex items-center justify-center">
                                     <span className="relative flex flex-col space-y-3 text-white text-lg font-medium">
                                         <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("Introduction"))}> 1. Introduction</p>
-                                        <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("DownloadPhantom"))}> 2. Getting started with Phantom</p>
-                                        <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("SelectWallet"))}> 3. Connect your wallet</p>
+                                        <p className="hover:text-sky-300 cursor-pointer" onClick={()=>(setSelected("DownloadPhantom"))}> 2. Getting started with Phantom</p>
+                                        <p className="hover:text-purple-300 cursor-pointer" onClick={()=>(setSelected("SelectWallet"))}> 3. Connect your wallet</p>
                                         <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("Devnet"))}> 4. Switching to devnet</p>
-                                        <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("Fees"))}> 5. Understanding fees</p>
-                                        <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("Airdrop"))}> 6. Airdrop</p>
+                                        <p className="hover:text-sky-300 cursor-pointer" onClick={()=>(setSelected("Fees"))}> 5. Understanding fees</p>
+                                        <p className="hover:text-purple-300 cursor-pointer" onClick={()=>(setSelected("Airdrop"))}> 6. Airdrop</p>
                                         <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("Message"))}> 7. Using Zelda</p>
-                                        <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("Message6"))}> 8. Troubleshooting</p>
-                                        <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("start"))}> 9. Reclaiming fees</p>
+                                        <p className="hover:text-purple-300 cursor-pointer" onClick={()=>(setSelected("Message6"))}> 8. Troubleshooting</p>
+                                        <p className="hover:text-purple-300 cursor-pointer" onClick={()=>(setSelected("start"))}> 9. Reclaiming fees</p>
                                         <p className="hover:text-teal-300 cursor-pointer" onClick={()=>(setSelected("start"))}> 10. About Web3 messaging</p>
                                     </span>
                                 </div>
@@ -66,7 +66,7 @@ const Help: NextPage = () => {
                     <div className="h-screen flex flex-col space-y-8 md:space-y-24 items-center pt-36" id={"Introduction"}>   
                         <p className="flex justify-center text-4xl md:text-6xl font-extrabold text-white" > Introduction</p>
                         <div className="flex flex-col space-y-6 md:space-y-24">
-                                <p className="w-3/6 flex text-transparent bg-clip-text border-gradient text-md md:text-xl mx-auto text-wrap text-center">
+                                <p className="w-3/6 flex text-transparent bg-clip-text border-gradient-variant text-md md:text-xl mx-auto text-wrap text-center">
                                     Zelda utilizes the Solana blockchain in the place of a server for the backend of a chat messaging application. 
                                     By using Zelda you will be familiarized with Web3 basics as well as both the advantages and limitations of blockchain infrastructure.
                                     Fundamental differences start with the authentication system. Authentication is baked into Web3 and to get started you will need your Web3 passport, your first wallet.
@@ -98,14 +98,14 @@ const Help: NextPage = () => {
                                         </header>
                                         <Link href="https://phantom.app/download">
                                             <a target="_blank">
-                                                <p className="text-slate-500 text-xl md:text-4xl  underline cursor-pointer
-                                                                hover:bg-sky-500 hover:text-black transition-all rounded ml-2">
+                                                <p className="text-purple-500 text-xl md:text-4xl  underline cursor-pointer
+                                                                hover:bg-emerald-500 hover:text-black transition-all rounded ml-2">
                                                     Here
                                                 </p>
                                             </a>
                                         </Link>
                                     </span>
-                                    <p className="flex text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-400 to-sky-500 text-xs md:text-lg mx-auto text-wrap">
+                                    <p className="flex border-gradient text-white p-2 font-bold text-xs md:text-lg mx-auto text-wrap">
                                         Select the extension based on your browser.
                                     </p>
                                 </div>
@@ -150,7 +150,7 @@ const Help: NextPage = () => {
                                     </span>
                                 </div>
                                 <div className="space-y-3 pr-4 flex max-w-[400px]">
-                                    <p className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-400 to-sky-500 text-xs md:text-md lg:text-lg mx-auto text-center">
+                                    <p className="rounded text-white p-2 md:p-3 border-gradient text-xs md:text-md lg:text-lg mx-auto text-center">
                                         The secret key is your real password and is unique to you. 
                                         You may recover your wallet from anywhere with this phrase and your phrase should never be shown to anyone if you plan on keeping your data and assets secure. If you lose your secret phrase you will lose your ability to recover and port your wallet from devices.
 
@@ -161,7 +161,7 @@ const Help: NextPage = () => {
                         <HiChevronDown className="chevron mt-8 md:mt-24 motion-safe:animate-bounce transition duration-700 ease-in-out" onClick={()=>(setSelected("SelectWallet"))}/>
                     </div>
             
-                    <div className="mt-16 flex h-screen flex-col items-center">
+                    <div className="mt-24 flex h-screen flex-col items-center">
                         <PageScroll 
                             image = "/select_wallet.png" 
                             w= {500} 
@@ -196,8 +196,8 @@ const Help: NextPage = () => {
                             The following permission will give read access from your wallet to the app and allow the app to request transactions from your wallet."
                             header="Allow Zelda"
                         />
-                        <p className="pb-16 -mt-16 text-white text-lg mx-auto text-center font-bold">
-                            congratulations, you are connected!
+                        <p className="pb-16 -mt-16 text-transparent bg-clip-text border-gradient-variant text-lg mx-auto text-center font-bold">
+                            Congratulations, you are connected!
                         </p>
                         <HiChevronDown className="chevron mt-0 motion-safe:animate-bounce transition duration-700 ease-in-out" onClick={()=>(setSelected("Devnet"))}/>
                     </div>
@@ -205,7 +205,7 @@ const Help: NextPage = () => {
                     <div className="h-screen flex flex-col space-y-8 md:space-y-24 items-center pt-36" id={"Devnet"}>   
                         <p className="flex justify-center text-4xl md:text-6xl font-extrabold text-white" > Switching to Devnet</p>
                         <div className="flex flex-col space-y-6 md:space-y-24">
-                                <p className="w-3/6 flex text-transparent bg-clip-text border-gradient text-md md:text-xl mx-auto text-wrap text-center">
+                                <p className="w-3/6 flex text-transparent bg-clip-text border-gradient-variant  text-md md:text-xl mx-auto text-wrap text-center">
                                 This step is optional but will help make sense of the experience. 
                                 Blockchain is new and exciting and in order to simulate test work in a proper environment Devnet exists. 
                                 Devnet is analogous to main-net, the real network, with the key difference being that the funds of Devnet do not have real world value and can be printed on a whim. 
@@ -247,8 +247,8 @@ const Help: NextPage = () => {
                             text="Select Devnet."
                             header="Wallet configued"
                         />
-                        <p className="pb-16 -mt-16 text-white text-lg mx-auto text-center font-bold">
-                            congratulations, you are connected to devnet!
+                        <p className="pb-16 -mt-16 text-transparent bg-clip-text border-gradient-varian text-lg mx-auto text-center font-bold ">
+                            Congratulations, you are connected to devnet!
                         </p>
                         <HiChevronDown className="chevron mt-0 motion-safe:animate-bounce transition duration-700 ease-in-out" onClick={()=>(setSelected("Fees"))}/>
                     </div>
@@ -256,9 +256,9 @@ const Help: NextPage = () => {
                     <div className="h-screen flex flex-col space-y-8 md:space-y-24 items-center pt-36" id={"Fees"}>   
                         <p className="flex justify-center text-4xl md:text-6xl font-extrabold text-white" > Understanding Fees</p>
                         <div className="flex flex-col space-y-6 md:space-y-24">
-                                <p className="w-4/6 flex text-transparent bg-clip-text border-gradient sm:text-sm md:text-md lg:text-xl mx-auto text-wrap text-center">
+                                <p className="w-4/6 flex text-transparent bg-clip-text border-gradient-variant sm:text-sm md:text-md lg:text-xl mx-auto text-wrap text-center">
                                 In order to utilize the blockchain, you must pay for transactions. 
-                                A blockchain is as strong as its weakest unit and by requiring performant hardware for each node Solana is fast and transactions take low percentage of the network's resources allowing the transactions to be cheap for the user. 
+                                A blockchain is as strong as its weakest unit and by requiring performant hardware for each node, Solana is fast and transactions take a low percentage of the network's resources allowing the transactions to be cheap for the user. 
                                 Typically it will cost a hundredth of a cent to perform an action. 
                                 However, when an action requires storing data, there is extra cost associated. Storage 
                                 is not infinite and you must pay a proportionate rent for the space you are borrowing. 
