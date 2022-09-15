@@ -196,7 +196,7 @@ const Help: NextPage = () => {
                             The following permission will give read access from your wallet to the app and allow the app to request transactions from your wallet."
                             header="Allow Zelda"
                         />
-                        <p className="pb-16 -mt-16 text-transparent bg-clip-text border-gradient-variant text-lg mx-auto text-center font-bold">
+                        <p className="pb-16 -mt-16 text-white text-lg mx-auto text-center font-bold">
                             Congratulations, you are connected!
                         </p>
                         <HiChevronDown className="chevron mt-0 motion-safe:animate-bounce transition duration-700 ease-in-out" onClick={()=>(setSelected("Devnet"))}/>
@@ -247,7 +247,7 @@ const Help: NextPage = () => {
                             text="Select Devnet."
                             header="Wallet configued"
                         />
-                        <p className="pb-16 -mt-16 text-transparent bg-clip-text border-gradient-varian text-lg mx-auto text-center font-bold ">
+                        <p className="pb-16 -mt-16 text-white text-lg mx-auto text-center font-bold ">
                             Congratulations, you are connected to devnet!
                         </p>
                         <HiChevronDown className="chevron mt-0 motion-safe:animate-bounce transition duration-700 ease-in-out" onClick={()=>(setSelected("Fees"))}/>

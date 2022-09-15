@@ -29,7 +29,7 @@ function PageScroll({image, w, h, id, text, header}:pageProps) {
                     </span>
                 </div>
                 <div className="space-y-3 pr-4 flex max-w-[400px]">
-                    <p className="text-transparent bg-clip-text border-gradient-variant2 text-xs md:text-sm lg:text-lg mx-auto text-center">
+                    <p className="rounded text-white p-2 md:p-3 border-gradient text-xs md:text-sm lg:text-lg mx-auto text-center">
                         {text}
                     </p>
                 </div>
