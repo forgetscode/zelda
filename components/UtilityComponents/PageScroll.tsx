@@ -54,7 +54,7 @@ const PageScroll: React.FC<pageProps> = ({image, w, h, id, text, header, prev, n
                                 </span>
                             </div>
                             <div className="space-y-3 pr-4 flex max-w-[400px]">
-                                <p className="rounded text-white p-2 md:p-3 border-gradient text-xs md:text-lg font-semibold mx-auto text-center shadow-md shadow-sky-500/50 animate-text">
+                                <p className="rounded text-white p-2 md:p-3 border-gradient text-xs md:text-lg font-semibold mx-auto text-center shadow-md shadow-sky-700/50 animate-text">
                                     {text}
                                 </p>
                             </div>

@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#141414]  text-white !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-teal-600;
+    @apply bg-gradient-to-r from-black  to-[#141414] text-white !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-teal-600;
   }
 }
 

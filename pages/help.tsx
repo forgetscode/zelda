@@ -91,7 +91,7 @@ const Help = ({IDList}:Props) => {
                                     </div>
                                 </div>
                             </div>
-                            <HiChevronDown className="chevron motion-safe:animate-bounce transition duration-700 ease-in-out" onClick={()=>(setSelected(IDList[1]))}/>
+                            <HiChevronDown className="mt-8 chevron motion-safe:animate-bounce transition duration-700 ease-in-out" onClick={()=>(setSelected(IDList[1]))}/>
                         </div>
 
                         
