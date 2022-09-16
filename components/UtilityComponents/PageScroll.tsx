@@ -38,11 +38,11 @@ const PageScroll: React.FC<pageProps> = ({image, w, h, id, text, header, prev, n
                         <></>
                 }
 
-                <div className="w-full flex flex-col items-center pb-8 md:pb-24" id={id}>
+                <div className="w-full flex flex-col items-center pb-8 " id={id}>
                     <div className="space-y-8">
                         <p className="text-xl md:text-4xl font-extrabold text-white mb-16"> {header}</p>
                         <div className="flex flex-row space-x-4 md:space-x-16 items-center">
-                            <div className="flex border-gradient-inverse">
+                            <div className="flex border-gradient-inverse shadow-lg shadow-purple-600/50">
                                 <span className="h-full w-full">
                                     <Image 
                                     src= {image}
@@ -54,7 +54,7 @@ const PageScroll: React.FC<pageProps> = ({image, w, h, id, text, header, prev, n
                                 </span>
                             </div>
                             <div className="space-y-3 pr-4 flex max-w-[400px]">
-                                <p className="rounded text-white p-2 md:p-3 border-gradient text-xs md:text-sm lg:text-lg mx-auto text-center">
+                                <p className="rounded text-white p-2 md:p-3 border-gradient text-xs md:text-lg font-semibold mx-auto text-center shadow-md shadow-sky-500/50 animate-text">
                                     {text}
                                 </p>
                             </div>
@@ -62,11 +62,11 @@ const PageScroll: React.FC<pageProps> = ({image, w, h, id, text, header, prev, n
                     </div>
                 </div>
                 { extraText ?
-                    <p className="pb-16 -mt-16 text-white text-lg mx-auto text-center font-bold">
+                    <p className=" -translate-16 text-white text-lg mx-auto text-center font-bold">
                         {extraText}
                     </p>
                     :
-                    <></>
+                    <div className='md:pb-16'/>
                 }
                 { setState ?
                     <HiChevronDown className="chevron motion-safe:animate-bounce transition duration-700 ease-in-out" onClick={()=>(setState(next!))}/>

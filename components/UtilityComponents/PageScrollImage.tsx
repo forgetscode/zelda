@@ -40,7 +40,7 @@ const PageScrollImage: React.FC<pageProps> = ({image, w, h, id, header, prev, ne
                     <div className="space-y-8">
                         <p className="text-xl md:text-4xl font-extrabold text-white mb-16"> {header}</p>
                         <div className="flex flex-row space-x-4 md:space-x-16 items-center">
-                            <div className="flex border-gradient">
+                            <div className="flex border-gradient shadow-lg shadow-purple-500/50">
                                 <span className="h-full w-full">
                                     <Image 
                                     src= {image}

@@ -27,7 +27,7 @@ const TextPageScroll: React.FC<pageProps> = ({ id, text, header, prev, next, set
             <React.Fragment>
                 <div className="h-screen flex flex-col space-y-8 md:space-y-24 items-center pt-36" id={id}>
                     { setState ?
-                        <div className='absolute p-12 w-5/6 -mt-24 text-white opacity-0 hover:opacity-100 cursor-pointer'  onClick={()=>(setState(prev!))}>
+                        <div className='absolute p-12 w-5/6 -mt-12 text-white opacity-0 hover:opacity-100 cursor-pointer'  onClick={()=>(setState(prev!))}>
                             <HiChevronUp className="flex chevron  w-full motion-safe:animate-bounce transition duration-700 ease-in-out"/>
                         </div>
                         :
@@ -35,7 +35,7 @@ const TextPageScroll: React.FC<pageProps> = ({ id, text, header, prev, next, set
                     }
                     <p className="flex justify-center text-4xl md:text-6xl font-extrabold text-white" > {header}</p>
                     <div className="flex flex-col space-y-6 md:space-y-24">
-                            <p className="w-3/6 flex text-transparent bg-clip-text border-gradient-variant text-md md:text-xl mx-auto text-wrap text-center">
+                            <p className="w-4/6 md:w-3/6 flex text-transparent bg-clip-text border-gradient-variant text-md md:text-xl mx-auto font-semibold text-wrap text-center">
                                 {text}
                             </p>
                     </div>
@@ -62,7 +62,7 @@ const TextPageScroll: React.FC<pageProps> = ({ id, text, header, prev, next, set
                     }
                     <p className="flex justify-center text-4xl md:text-6xl font-extrabold text-white" > {header}</p>
                     <div className="flex flex-col space-y-6 md:space-y-24">
-                            <p className="w-3/6 flex text-transparent bg-clip-text border-gradient text-md md:text-xl mx-auto text-wrap text-center">
+                            <p className="w-4/6 md:w-3/6 flex text-transparent bg-clip-text border-gradient text-md md:text-xl mx-auto font-semibold text-wrap text-center">
                                 {text}
                             </p>
                     </div>

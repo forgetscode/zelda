@@ -12,6 +12,7 @@ module.exports = {
     extend: {
       'animation': {
             'text':'text 5s ease infinite',
+            'slow':'text 20s ease infinite',
         },
         'keyframes': {
             'text': {
@@ -24,6 +25,7 @@ module.exports = {
                     'background-position': 'right center'
                 }
             },
+            
         },
       fontFamily: {
         'manrope': 'Manrope',

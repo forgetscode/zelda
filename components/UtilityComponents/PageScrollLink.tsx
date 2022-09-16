@@ -33,7 +33,7 @@ const PageScrollLink: React.FC<pageProps> = ({image, w, h, id, link, text, heade
 
                 { setState ?
                     <div className='absolute p-12 w-5/6 -mt-24 text-white opacity-0 hover:opacity-100 cursor-pointer'  onClick={()=>(setState(prev!))}>
-                        <HiChevronUp className="flex chevron mt-8 w-full motion-safe:animate-bounce transition duration-700 ease-in-out"/>
+                        <HiChevronUp className="flex chevron mt-16 w-full motion-safe:animate-bounce transition duration-700 ease-in-out"/>
                     </div>
                     : <></>
                 }
@@ -42,7 +42,7 @@ const PageScrollLink: React.FC<pageProps> = ({image, w, h, id, link, text, heade
                     <div className="space-y-8">
                         <p className="text-xl md:text-4xl font-extrabold text-white mb-16"> {header}</p>
                         <div className="flex flex-row space-x-4 md:space-x-16 items-center">
-                            <div className="flex border-gradient">
+                            <div className="flex border-gradient shadow-lg shadow-purple-500/50">
                                 <span className="h-full w-full">
                                     <Image 
                                     src={image}
@@ -69,7 +69,7 @@ const PageScrollLink: React.FC<pageProps> = ({image, w, h, id, link, text, heade
                                 </span>
                                 { 
                                     text ? 
-                                    <p className="flex border-gradient text-white p-2 font-bold text-xs md:text-lg mx-auto text-wrap">
+                                    <p className="flex border-gradient text-white p-2 font-bold text-xs md:text-lg mx-auto text-wrap animate-text ">
                                         {text}
                                     </p>
                                     :
