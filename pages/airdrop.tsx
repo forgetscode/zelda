@@ -2,7 +2,6 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import type { NextPage } from 'next'
 import Head from 'next/head';
 import Image from 'next/image'
-import { getPlaiceholder } from 'plaiceholder';
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { CreateWorkspace } from '../components/UtilityComponents/CreateWorkspace';
