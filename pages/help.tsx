@@ -268,8 +268,8 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/airdrop2.png" 
-                            w= {300} 
-                            h= {500} 
+                            w= {225} 
+                            h= {300}
                             id = {IDList[15]}
                             text="After the app notifies you the airdrop was successful, check your wallet and you should have 1 Sol. Make sure you are on devnet and not main-net if you wish to see your funds."
                             header="Check your Airdrop"
