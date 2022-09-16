@@ -168,12 +168,12 @@ const Reclaim: NextPage = () => {
                     {
                         data
                         ?                    
-                        <button className='mx-auto w-20 text-center bg-teal-600 flex p-6 rounded-lg hover:bg-teal-400 items-center justify-center transition-all'
+                        <button className='mx-auto w-20 text-center text-black bg-teal-600 flex p-6 rounded-lg hover:bg-teal-400 items-center justify-center transition-all'
                         onClick={()=> {reclaim()}}>
                             { !loading ? "Ready" :<LoadingSpinner sizeOf ={"small"}></LoadingSpinner>}
                         </button>
                         :
-                        <button className='mx-auto w-20 text-center bg-teal-600 flex p-6 rounded-lg hover:bg-teal-400 items-center justify-center transition-all'
+                        <button className='mx-auto w-20 text-center text-black bg-teal-600 flex p-6 rounded-lg hover:bg-teal-400 items-center justify-center transition-all'
                         onClick={()=> {fetchData()}}>
                             { !loading ? "Load" :<LoadingSpinner sizeOf ={"small"}></LoadingSpinner>}
                         </button>
