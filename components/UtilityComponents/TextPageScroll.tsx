@@ -35,7 +35,7 @@ const TextPageScroll: React.FC<pageProps> = ({ id, text, header, prev, next, set
                     }
                     <p className="flex justify-center text-4xl md:text-6xl font-extrabold text-white" > {header}</p>
                     <div className="flex flex-col space-y-6 md:space-y-24">
-                            <p className="w-4/6 md:w-3/6 flex text-transparent bg-clip-text border-gradient-variant text-md md:text-xl mx-auto font-semibold text-wrap text-center">
+                            <p className="w-4/6 md:w-3/6 flex text-transparent bg-clip-text bg-sky-500 text-md md:text-xl mx-auto font-semibold text-wrap text-center">
                                 {text}
                             </p>
                     </div>

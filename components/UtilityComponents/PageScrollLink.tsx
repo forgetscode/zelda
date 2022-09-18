@@ -61,7 +61,7 @@ const PageScrollLink: React.FC<pageProps> = ({image, w, h, id, link, text, heade
                                     <Link href={link}>
                                         <a target="_blank">
                                             <p className="text-purple-500 text-xl md:text-4xl  underline cursor-pointer
-                                                            hover:bg-emerald-500 hover:text-black transition-all rounded ml-2">
+                                                            hover:bg-emerald-500 hover:text-black transition-all rounded ml-2 pb-0.5">
                                                 Here
                                             </p>
                                         </a>
