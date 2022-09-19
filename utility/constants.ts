@@ -11,6 +11,10 @@ export let sizes = {
         w: 550,
         h: 550,
     },
+    lgMisfit:{
+        w:650,
+        h:500,
+    }
 }
 
 export let helpLength = 40
