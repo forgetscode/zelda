@@ -1,12 +1,13 @@
 import Head from "next/head";
 import React from "react";
 import { useEffect, useState } from "react";
-import { HiChevronDown, HiTerminal } from "react-icons/hi";
+import { HiChevronDown, HiChevronUp, HiTerminal } from "react-icons/hi";
 import PageScrollLink from "../components/UtilityComponents/PageScrollLink";
 import PageScroll from "../components/UtilityComponents/PageScroll";
 import PageScrollImage from "../components/UtilityComponents/PageScrollImage";
-import TextPageScroll from "../components/UtilityComponents/TextPageScroll";
-import ParticleBackground from "../components/UtilityComponents/ParticleBackground";
+import PageScrollText from "../components/UtilityComponents/PageScrollText";
+import Image from 'next/image'
+import { sizes, helpLength } from "../utility/constants";
 
 function GetArray(n:number){
     return Array.from({length: n}, (x, i) => i).map(String)
@@ -96,13 +97,13 @@ const Help = ({IDList}:Props) => {
 
                         
 
-                        <TextPageScroll
+                        <PageScrollText
                             id = {IDList[1]}
                             text= 
                             {`Zelda utilizes the Solana blockchain in the place of a server for the backend of a chat messaging application. 
                             By using Zelda you will be familiarized with Web3 basics as well as both the advantages and limitations of blockchain 
-                            infrastructure.Fundamental differences start with the authentication system. Authentication is baked into Web3 and to get 
-                            started you will need your Web3 passport, your first wallet.`}
+                            infrastructure. Fundamental differences start with the authentication system. Authentication is baked into Web3 and to get 
+                            you started you will need your Web3 passport, your first wallet.`}
 
                             header= "Introduction"
                             setState={setSelected}
@@ -110,8 +111,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScrollLink
                             image = "/download_phantom.png"
-                            w= {550} 
-                            h= {550} 
+                            size={sizes.lg} 
                             link="https://phantom.app/download"
                             id = {IDList[2]}
                             text = "Select the extension based on your browser."
@@ -121,8 +121,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScrollImage 
                             image = "/create_wallet.png"
-                            w= {350} 
-                            h= {400} 
+                            size={sizes.md}  
                             id = {IDList[3]}
                             header= "Create your wallet"
                             setState={setSelected}
@@ -130,8 +129,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/secret_key.png" 
-                            w= {275} 
-                            h= {300} 
+                            size={sizes.sm} 
                             id = {IDList[4]}
 
                             text= 
@@ -146,8 +144,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/select_wallet.png" 
-                            w= {500} 
-                            h= {400} 
+                            size={sizes.lg} 
                             id = {IDList[5]}
                             text= "Hit “Select Wallet” in the top right of the Navigation bar."
                             header= "Select your wallet"
@@ -156,8 +153,7 @@ const Help = ({IDList}:Props) => {
                         
                         <PageScroll 
                             image = "/connect_wallet.png" 
-                            w= {500} 
-                            h= {400} 
+                            size={sizes.lg} 
                             id = {IDList[6]}
                             text="From the modal that pops up confirm your Phantom wallet by clicking on it on the modal."
                             header="Connect your wallet"
@@ -166,8 +162,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/allow_zelda.png" 
-                            w= {225} 
-                            h= {320} 
+                            size={sizes.sm} 
                             id = {IDList[7]}
                             text=
                             {`Approve the Zelda application to interact with your wallet by hitting connect. 
@@ -179,7 +174,7 @@ const Help = ({IDList}:Props) => {
                             extraText="Congratulations, you are connected!"
                         />
 
-                        <TextPageScroll
+                        <PageScrollText
                             id = {IDList[8]}
 
                             text= 
@@ -194,8 +189,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/devnet_1.png" 
-                            w= {225} 
-                            h= {300} 
+                            size={sizes.sm}  
                             id = {IDList[9]}
                             text="Click on your wallet and hit the cog icon in the bottom right corner."
                             header="Configure your wallet"
@@ -204,8 +198,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/devnet_2.png" 
-                            w= {225} 
-                            h= {300} 
+                            size={sizes.sm}  
                             id = {IDList[10]}
                             text="Scrolldown and select “Change Network”."
                             header="Configuring your wallet..."
@@ -215,8 +208,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/devnet_3.png" 
-                            w= {225} 
-                            h= {300} 
+                            size={sizes.sm}  
                             id = {IDList[11]}
                             text="Select Devnet."
                             header="Wallet configued"
@@ -225,28 +217,28 @@ const Help = ({IDList}:Props) => {
                         />
 
 
-                        <TextPageScroll
+                        <PageScrollText
                             id = {IDList[12]}
 
                             text= 
-                            {`In order to utilize the blockchain, you must pay for transactions. 
-                            A blockchain is as strong as its weakest unit and by requiring performant hardware for each node, Solana is fast and transactions take a low percentage of the network's resources allowing the transactions to be cheap for the user. 
-                            Typically it will cost a hundredth of a cent to perform an action. 
+                            {`Blockchain transactions have fees. 
+                            A blockchain is as strong as its weakest unit and by requiring performant hardware for each node, Solana is fast and transactions take a low percentage of the network's resources. 
+                            Typically it will cost a hundredth of a cent to perform an action on Solana. 
                             However, when an action requires storing data, there is extra cost associated. Storage 
-                            is not infinite and you must pay a proportionate rent for the space you are borrowing. 
-                            When you have released your storage, the extra funds will be returned to you making the cost of storage temporary.`}
+                            is not infinite and you must pay a proportionate rent for the space you are using. 
+                           `}
 
                             header= "Understanding Fees"
                             setState={setSelected}
                         />
 
 
-                        <TextPageScroll
+                        <PageScrollText
                             id = {IDList[13]}
 
                             text= 
-                            {`Sending funds will be close to free but creating accounts to store that data will cost a few cents for “rent”.
-                            You may have your rent be returned by closing those accounts. 
+                            {`Sending funds will be close to free but creating new accounts to store that data will cost a few cents for “rent”.
+                            You may have your rent be returned by closing these accounts. 
                             Space is not infinite so it needs to have a cost which for now is the effort in closing the account. 
                             As hardware improves and better tools are created on the network, space will have lower cost 
                             and become more of an automatic process. `}
@@ -259,8 +251,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/Airdrop.png" 
-                            w= {500} 
-                            h= {400} 
+                            size={sizes.lg} 
                             id = {IDList[14]}
                             text="To get some devnet funds click on the airdrop page from the sidebar and hit the Aidrop button to collect some devnet sol."
                             header="Airdrop"
@@ -269,8 +260,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/airdrop2.png" 
-                            w= {225} 
-                            h= {300}
+                            size={sizes.sm} 
                             id = {IDList[15]}
                             text="After the app notifies you the airdrop was successful, check your wallet and you should have 1 Sol. Make sure you are on devnet and not main-net if you wish to see your funds."
                             header="Check your Airdrop"
@@ -280,8 +270,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/messages.png" 
-                            w= {300} 
-                            h= {400} 
+                            size={sizes.sm} 
                             id = {IDList[16]}
                             text="After connecting and funding your wallet, select the messages Icon from the sidebar and you will be introduced to the messaging application."
                             header="Using Zelda"
@@ -290,35 +279,57 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/messages2.png" 
-                            w= {300} 
-                            h= {400} 
+                            size={sizes.sm}  
                             id = {IDList[17]}
                             text="Most likely you currently have no chats. Let’s change that! Hit the add chat icon to start your first chat."
                             header="Chats"
                             setState={setSelected}
                         />
 
-                        <PageScroll 
-                            image = "/messages3.png" 
-                            w= {500} 
-                            h= {250} 
-                            id = {IDList[18]}
-                            text="Enter the public key of someone you want to chat with. This can be almost anyone but there are a few rules.
-                                        
-                            1. You cannot start a chat with yourself. This constraint at the program level on the blockchain and there is no way to circumvent this.
-
-                            2. You cannot have more than 6 outgoing chats and 6 receiving chats at the same time. This constraint was created at the client level and can be arbitrarily adjusted by another programmer. This is a lazy way to address spam.
-                            "
-                            header="Adding a chat"
-                            setState={setSelected}
-                        />
+                        <div className="mt-24 flex h-screen flex-col items-center space-y-8">
+                            <div className='absolute p-12 w-5/6 -mt-24 text-white opacity-0 hover:opacity-100 cursor-pointer'  onClick={()=>(setSelected("17"))}>
+                                <HiChevronUp className="flex chevron  w-full motion-safe:animate-bounce transition duration-700 ease-in-out"/>
+                            </div>
+                            <div className="w-full flex flex-col items-center pb-8 " id={"18"}>
+                                <div className="space-y-8">
+                                    <p className="text-xl md:text-4xl font-extrabold text-white mb-16"> {"Adding a chat"}</p>
+                                    <div className="flex flex-row space-x-4 md:space-x-16 items-center">
+                                        <div className="flex border-gradient-inverse shadow-lg shadow-purple-600/50">
+                                            <span className="h-full w-full">
+                                                <Image 
+                                                src= "/messages3.png" 
+                                                loading="lazy" 
+                                                placeholder="blur"
+                                                blurDataURL="/messages3.png" 
+                                                width={400} 
+                                                height={200} 
+                                                />
+                                            </span>
+                                        </div>
+                                        <div className="space-y-6 pr-4 flex flex-col max-w-[500px]">
+                                            <p className="rounded text-white p-2 md:p-3 border-gradient text-xs md:text-lg font-semibold mx-auto text-center shadow-md shadow-sky-700/50 animate-text">
+                                                {"Enter the public key of someone you want to chat with. This can be almost anyone but there are a few rules."}
+                                            </p>
+                                            <p className="text-white text-xs md:text-lg font-semibold mx-auto text-center">
+                                                {"You cannot start a chat with yourself. This constraint is at the program level on the blockchain and there is no way to circumvent this."}
+                                            </p>
+                                            <p className="text-white text-xs md:text-lg font-semibold mx-auto text-center">
+                                                {`You cannot have more than 6 outgoing chats and 6 receiving chats at the same time. 
+                                                This constraint was created at the client level and can be arbitrarily adjusted by another programmer. This is a lazy way to address spam.`}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='md:pb-16'/>
+                            <HiChevronDown className="chevron motion-safe:animate-bounce transition duration-700 ease-in-out"  onClick={()=>(setSelected("19"))}/>
+                        </div>
 
 
 
                         <PageScroll 
                             image = "/messages4.png" 
-                            w= {400} 
-                            h= {400} 
+                            size={sizes.lg}  
                             id = {IDList[19]}
                             text="Hit the approve button to sign the transaction. 
                             This will send the request to create a chat to the blockchain just like how you would normally send the request to a server."
@@ -329,8 +340,7 @@ const Help = ({IDList}:Props) => {
 
                         <PageScroll 
                             image = "/messages5.png" 
-                            w= {400} 
-                            h= {400} 
+                            size={sizes.lg}  
                             id = {IDList[20]}
                             text="If everything went correctly you should see a chat created notification and your first chat."
                             header="Success!"
@@ -356,7 +366,7 @@ const Help = ({IDList}:Props) => {
 export default Help
 
 export async function getStaticProps() {
-    const IDList = GetArray(40)
+    const IDList = GetArray(helpLength)
     return {
       props: {IDList}
     }

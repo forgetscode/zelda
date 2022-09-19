@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
-import Image from 'next/image'
 
 interface pageProps{
     id:string,
@@ -12,7 +11,7 @@ interface pageProps{
     variant?: string,
 }
 
-const TextPageScroll: React.FC<pageProps> = ({ id, text, header, prev, next, setState, variant}) => {
+const PageScrollText: React.FC<pageProps> = ({ id, text, header, prev, next, setState, variant}) => {
 
     if (!prev) {
         prev = String(Number(id) -1)
@@ -35,7 +34,7 @@ const TextPageScroll: React.FC<pageProps> = ({ id, text, header, prev, next, set
                     }
                     <p className="flex justify-center text-4xl md:text-6xl font-extrabold text-white" > {header}</p>
                     <div className="flex flex-col space-y-6 md:space-y-24">
-                            <p className="w-4/6 md:w-3/6 flex text-transparent bg-clip-text bg-sky-500 text-md md:text-xl mx-auto font-semibold text-wrap text-center">
+                            <p className="w-4/6 md:w-3/6 flex text-transparent bg-clip-text bg-sky-500 text-sm sm:text-md md:text-xl mx-auto md:font-semibold text-wrap text-center">
                                 {text}
                             </p>
                     </div>
@@ -62,7 +61,7 @@ const TextPageScroll: React.FC<pageProps> = ({ id, text, header, prev, next, set
                     }
                     <p className="flex justify-center text-4xl md:text-6xl font-extrabold text-white" > {header}</p>
                     <div className="flex flex-col space-y-6 md:space-y-24">
-                            <p className="w-4/6 md:w-3/6 flex text-transparent bg-clip-text border-gradient text-md md:text-xl mx-auto font-semibold text-wrap text-center">
+                            <p className="w-4/6 md:w-3/6 flex text-transparent bg-clip-text border-gradient text-sm sm:text-md md:text-xl mx-auto md:font-semibold text-wrap text-center">
                                 {text}
                             </p>
                     </div>
@@ -81,4 +80,4 @@ const TextPageScroll: React.FC<pageProps> = ({ id, text, header, prev, next, set
     }
 }
 
-export default TextPageScroll
+export default PageScrollText

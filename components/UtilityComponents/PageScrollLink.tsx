@@ -3,10 +3,14 @@ import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import Image from 'next/image'
 import Link from 'next/link'
 
+interface sizes {
+    w:number,
+    h:number,
+}
+
 interface pageProps{
     image:string,
-    w:number, 
-    h:number,  
+    size:sizes,  
     id:string,
     link:string,
     text?:string,
@@ -17,7 +21,7 @@ interface pageProps{
 }
 
 
-const PageScrollLink: React.FC<pageProps> = ({image, w, h, id, link, text, header, prev, next, setState}) => {
+const PageScrollLink: React.FC<pageProps> = ({image, size, id, link, text, header, prev, next, setState}) => {
 
     if (!prev) {
         prev = String(Number(id) -1)
@@ -49,7 +53,7 @@ const PageScrollLink: React.FC<pageProps> = ({image, w, h, id, link, text, heade
                                     loading="lazy" 
                                     placeholder="blur"
                                     blurDataURL={image}
-                                    width={w} height={h} 
+                                    width={size.w} height={size.h} 
                                     />
                                 </span>
                             </div>

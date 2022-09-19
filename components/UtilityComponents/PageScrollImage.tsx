@@ -2,10 +2,14 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import Image from 'next/image'
 
+interface sizes {
+    w:number,
+    h:number,
+}
+
 interface pageProps{
     image:string,
-    w:number, 
-    h:number,  
+    size:sizes,  
     id:string,
     header:string,
     prev?: string,
@@ -14,7 +18,7 @@ interface pageProps{
 }
 
 
-const PageScrollImage: React.FC<pageProps> = ({image, w, h, id, header, prev, next, setState}) => {
+const PageScrollImage: React.FC<pageProps> = ({image, size, id, header, prev, next, setState}) => {
 
     if (!prev) {
         prev = String(Number(id) -1)
@@ -47,7 +51,7 @@ const PageScrollImage: React.FC<pageProps> = ({image, w, h, id, header, prev, ne
                                     loading="lazy" 
                                     placeholder="blur"
                                     blurDataURL={image}
-                                    width={w} height={h} 
+                                    width={size.w} height={size.h} 
                                     />
                                 </span>
                             </div>
