@@ -9,7 +9,7 @@ export let sizes = {
     },
     lg:{
         w: 550,
-        h: 550,
+        h: 500,
     },
     lgMisfit:{
         w:650,
